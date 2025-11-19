@@ -12,13 +12,16 @@ class Category:
         self.name = name
         self.fragen = fragen
         self.score = 0
-        self.attempts = 0  # Neu: Gesamtversuche pro Kategorie
+        self.attempts = 0  # Gesamtversuche pro Kategorie
         self.failed_attempts = 0
-        self.status = "pending"
+        self.status = "pending"  # pending, completed, failed
 
     def play_category(self):
+        """
+        Spielt die Kategorie einmal durch. Gibt die Anzahl der Versuche zurück.
+        """
         print(f"\nKategorie: {self.name}")
-        max_attempts = len(self.fragen)  # Dynamisch: Anzahl der Fragen
+        max_attempts = len(self.fragen)
         versuche_in_dieser_runde = 0
 
         for attempt in range(max_attempts):
@@ -30,12 +33,12 @@ class Category:
                     self.score += 1
                     self.status = "completed"
                     versuche_in_dieser_runde += 1
-                    print("Du hast die Kategorie bestanden!\n")
+                    print(" Du hast die Kategorie bestanden!\n")
                     break
                 else:
                     self.failed_attempts += 1
                     versuche_in_dieser_runde += 1
-                    print(f"Versuch {attempt+1} fehlgeschlagen.\n")
+                    print(f" Versuch {attempt+1} fehlgeschlagen.\n")
             else:
                 aktuelle_frage.anzeigen()
                 try:
@@ -50,10 +53,10 @@ class Category:
                     if aktuelle_frage.pruefe_antwort(auswahl):
                         self.score += 1
                         self.status = "completed"
-                        print("Du hast die Kategorie bestanden!\n")
+                        print(" Du hast die Kategorie bestanden!\n")
                         break
                     else:
-                        print(f"Versuch {attempt+1} fehlgeschlagen.\n")
+                        print(f" Versuch {attempt+1} fehlgeschlagen.\n")
                 except ValueError:
                     print("Ungültige Eingabe! Bitte eine Zahl eingeben.\n")
                 except UngueltigeAuswahlError as e:
