@@ -3,65 +3,66 @@ from typing import List
 from src.question import Frage
 from src.frage_ohne_index import FrageOhneIndex
 
-class Category:
-    """
-    Repräsentiert eine Kategorie im Quiz.
-    
-    Attribute:
-        name (str): Name der Kategorie.
-        fragen (List): Liste der Fragen in dieser Kategorie (Frage oder FrageOhneIndex).
-        score (int): Punkte, die in dieser Kategorie erzielt wurden.
-        failed_attempts (int): Anzahl der fehlgeschlagenen Versuche.
-        status (str): Status der Kategorie ('pending', 'completed', 'failed').
-    """
+class UngueltigeAuswahlError(Exception):
+    """Wird ausgelöst, wenn die Eingabe außerhalb des gültigen Bereichs liegt."""
+    pass   
 
+class Category:
     def __init__(self, name: str, fragen: List):
         self.name = name
         self.fragen = fragen
         self.score = 0
+        self.attempts = 0  # Neu: Gesamtversuche pro Kategorie
         self.failed_attempts = 0
         self.status = "pending"
 
     def play_category(self):
-        """
-        Spielt die Kategorie:
-        - Maximal 3 Versuche (3 Fragen).
-        - Bei richtiger Antwort: Kategorie abgeschlossen.
-        - Bei 3 falschen Antworten: Kategorie fehlgeschlagen.
-        """
         print(f"\nKategorie: {self.name}")
-        max_attempts = 3
+        max_attempts = len(self.fragen)  # Dynamisch: Anzahl der Fragen
+        versuche_in_dieser_runde = 0
 
         for attempt in range(max_attempts):
             aktuelle_frage = self.fragen[attempt]
 
-            # Sonderfrage ohne Antwortoptionen
             if isinstance(aktuelle_frage, FrageOhneIndex):
                 print("\n(Sonderfrage ohne Antwortoptionen)")
                 if aktuelle_frage.stellen():
                     self.score += 1
                     self.status = "completed"
+                    versuche_in_dieser_runde += 1
                     print("Du hast die Kategorie bestanden!\n")
-                    return
+                    break
                 else:
                     self.failed_attempts += 1
+                    versuche_in_dieser_runde += 1
                     print(f"Versuch {attempt+1} fehlgeschlagen.\n")
             else:
-                # Normale Frage mit Antwortoptionen
                 aktuelle_frage.anzeigen()
                 try:
                     auswahl = int(input("Deine Auswahl: "))
+                    
+                    if auswahl < 1 or auswahl > len(aktuelle_frage.antworten):
+                        raise UngueltigeAuswahlError("Die Auswahl liegt außerhalb des gültigen Bereichs.")
+                    
+                    versuche_in_dieser_runde += 1
                     self.failed_attempts += 1
+
                     if aktuelle_frage.pruefe_antwort(auswahl):
                         self.score += 1
                         self.status = "completed"
                         print("Du hast die Kategorie bestanden!\n")
-                        return
+                        break
                     else:
                         print(f"Versuch {attempt+1} fehlgeschlagen.\n")
                 except ValueError:
                     print("Ungültige Eingabe! Bitte eine Zahl eingeben.\n")
+                except UngueltigeAuswahlError as e:
+                    print(f"Fehler: {e}\n")
 
-        self.status = "failed"
-        print("Leider alle Versuche verbraucht. Kategorie fehlgeschlagen!\n")
-        return
+        if self.status != "completed":
+            self.status = "failed"
+            print("Leider alle Versuche verbraucht. Kategorie fehlgeschlagen!\n")
+
+        # Gesamtversuche aktualisieren
+        self.attempts += versuche_in_dieser_runde
+        return versuche_in_dieser_runde

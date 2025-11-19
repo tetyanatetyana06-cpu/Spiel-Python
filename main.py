@@ -2,6 +2,7 @@
 from src.question import Frage
 from src.frage_ohne_index import FrageOhneIndex
 from src.category import Category
+from src.category import Category, UngueltigeAuswahlError
 
 def main():
     """
@@ -28,8 +29,8 @@ def main():
     
     # Berechnung für die BWL-Frage
     mitarbeiter = 20000
-    produktion = 11500
-    produktivität = round(produktion / mitarbeiter, 2)  # Ergebnis: 0,57 Tische/Mitarbeiter/Jahr
+    produktion = 40000
+    produktivität = round(produktion / mitarbeiter, 2)  # Ergebnis: 2 Tische/Mitarbeiter/Jahr
 
     fragen_bwl = [
         Frage("Was verlangt das ökonomische Prinzip?", ["...das Verhältnis aus Transformations- und Produktionsaufwand zu optimieren", "...das Verhältnis aus Produktionsergebnis und Produktionseinsatz zu optimieren", "...die Rentabilität aus wertmäßigem Output und mengenmäßigem Input zu maximieren", "...die Arbeitsproduktivität sowie den Output zu maximieren"], 1),
@@ -51,34 +52,44 @@ def main():
         Category("Marketing", fragen_marketing)
     ]
 
+
+    for kat in kategorien:
+        kat.score = 0
+        kat.attempts = 0
+    gesamt_versuche = 0
+
+    print("\nWillkommen zum Quiz! Punktestand beginnt bei 0.\n")
+
     while True:
-        # Punkte berechnen
         gesamt_score = sum(k.score for k in kategorien)
 
         print("\n=== Kategorien-Menü ===")
-        print(f"Aktueller Punktestand: {gesamt_score}")
+        print(f"Aktueller Punktestand: {gesamt_score} | Gesamtversuche: {gesamt_versuche}")
         for i, kat in enumerate(kategorien, start=1):
-            print(f"{i}. {kat.name}")
+            print(f"{i}. {kat.name} (Score: {kat.score}, Versuche: {kat.attempts})")
         print(f"{len(kategorien)+1}. Beenden")
 
-        auswahl = input("Bitte wählen: ")
+        try:
+            auswahl = int(input("Bitte wählen: "))
+            if auswahl < 1 or auswahl > len(kategorien) + 1:
+                raise UngueltigeAuswahlError("Die gewählte Kategorie existiert nicht.")
 
-        if auswahl.isdigit():
-            auswahl = int(auswahl)
             if 1 <= auswahl <= len(kategorien):
-                kategorien[auswahl - 1].play_category()
+                versuche = kategorien[auswahl - 1].play_category()
+                gesamt_versuche += versuche
             elif auswahl == len(kategorien) + 1:
-                gesamt_score = sum(k.score for k in kategorien)
-                gesamt_versuche = sum(k.failed_attempts for k in kategorien)
-                print("\n=== Endauswertung ===")
-                print(f"Gesamtpunkte: {gesamt_score}")
-                print(f"Gesamtversuche: {gesamt_versuche}")
-                print("Quiz beendet.")
+                print("\nQuiz beendet.")
+                print(f"Endergebnis: {gesamt_score} Punkte bei {gesamt_versuche} Versuchen.")
+                print("\n=== Übersicht pro Kategorie ===")
+                for kat in kategorien:
+                    print(f"{kat.name}: {kat.score} Punkte bei {kat.attempts} Versuchen")
                 break
-            else:
-                print("Ungültige Auswahl!")
-        else:
-            print("Bitte eine Zahl eingeben!")
+
+        except ValueError:
+            print("Ungültige Eingabe! Bitte eine Zahl eingeben.")
+        except UngueltigeAuswahlError as e:
+            print(f"Fehler: {e}")
+
 
 if __name__ == "__main__":
     main()
