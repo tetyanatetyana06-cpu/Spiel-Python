@@ -19,4 +19,12 @@ Man öffnet Visual Studio Code und klickt auf das Account-icon in der Status-Lei
 auswählen. Ist dies nicht vorhanden, kann man auf die Suchleiste in Visual Studio Code klicken und dort "GitHub" eingeben.
 Als eins der Ergebnisse sollte ein blaues Feld mit "sign in to sync settings" auftauchen, welches man auswählt. Man
 wird zu der Online-Seite weitergeleitet, wo man Visual Studio Code authorisieren muss. Es sollte eine Box mit dem 
-eigenen GitHub-Account auftauchen, wo man auf das grüne Feld "Continue" klickt.
+eigenen GitHub-Account auftauchen, wo man auf das grüne Feld "Continue" klickt. Daraufhin erscheint das Visual Studio Code 
+Zeichen und man wird zu der Visual Studio Code Desktop App weitergeleitet.
+Dort kann man per Klick auf das Account-Icon überprüfen können, ob man eingeloggt ist.
+
+Repository Clonen:
+Man klickt auf den grünen Code Button in der <Code> Abteilung von GitHub. Dort kopiert man die URL des Repositorys
+und öffnet die Visual Studio Code App. Man wählt ganz links das Source Control-Zeichen in der leiste aus und klickt auf das blaue
+Feld "Clone Repository". Jetzt kann man in die Suchleiste oben in der Mitte der Benutzeroberfläche die URL hineinkopieren und 
+die Projektstruktur sollte links im Explorer auftauchen.
