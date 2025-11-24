@@ -13,11 +13,11 @@ Inhaltsverzeichnis:
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
    
-1. Projektbeschreibung: //
+1. Projektbeschreibung: <br>
 Ein Quiz, was unsere Komilitonen helfen soll, ihr Wissen zu zwei unserer Prüfungsfächer aufzufrischen. 
 Das Quiz beinhaltet Multipe-Choice-Fragen, sowie Rechenaufgaben und eine kleine Spaß-Kategorie, die Fragen stellt,
 welche nichts mit Uni-Inhalten gemein haben.
-Das Quiz besteht aus vier Kategorien, die in beliebiger Reihenfolge abgearbeitet werden könnnen. Jede Kategorie enthält
+Das Quiz besteht aus vier Kategorien, die in beliebiger Reihenfolge abgearbeitet werden können. Jede Kategorie enthält
 maximal drei Fragen. Beantwortet der Nutzer die erste Frage richtig, besteht er die Kategorie. Hat der Benutzer eine Frage falsch beantwortet, 
 hat er noch zwei weitere Versuche mit zwei anderen Fragen, bevorer in der Kategorie druchfällt. Am Ende des Quiz wird das Ergebnis des 
 Benutzers ausgewertet. Man kann das Quiz auch während des Versuchs neustarten, wobei alle bisherigen Eingaben des Durchlaufs gelöscht werden.
@@ -27,29 +27,29 @@ haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet.
   
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-2. Voraussetungen und Installation
-  2.1 Voraussetzungen für das Durchlaufen des Quiz:
+2. Voraussetzungen und Installation <br>
+  2.1 Voraussetzungen für das Durchlaufen des Quiz: <br>
 
   -Python Version 3.13.2 muss auf dem Rechner installiert sein.
   -Visual Studion Code, bzw eine andere Code-Editor Software, muss auf dem Rechner installiert sein.
   -Es muss ein GitHub-Account vorhanden sein, der mit dem Code-Editor-Programm verbunden ist.
 
 
-  2.2 Installationsanleitung Python 3.13.2:
-   Windows
+  2.2 Installationsanleitung Python 3.13.2: <br>
+   Windows <br>
    Man geht auf die offzielle Python Website (Python.org) und geht zu python.org/downloads.
    Daraufhin wählt man Python 3.13.2 aus und lädt den Installer für Windows herunter.Nun kann man die .exe Datei ausführen,
    wobei es wichtig ist die Option "Add Python to PATH" auszuwählen, und dann klickt man auf Install Now.
    Jetzt öffnet man das Rechnerterminal und prüft mit "python --version", ob der Download erfolgreich war.
 
-   macOS
+   macOS <br>
    Für macOS empfiehlt es sich homebrew zu verwenden. Dort tippt man "brew install python@3.13" ein, und danach passt man es mit
    "echo 'export PATH="/usr/local/opt/python@3.13/bin:$PATH"' >> ~/.zshrc
     source ~/.zshrc" an.
    Alternativ kann man sich auch das macOS-Paket von Python herunterladen und installieren.
 
 
-   2.3 Installationsanleitung Visual Studio Code:
+   2.3 Installationsanleitung Visual Studio Code: <br>
     Windows
     Man begibt sich zu https://code.visualstudio.com/ und lädt den Installer für Windows herunter.
     Daraufhin führt man die heruntrgeladene .exe Datei aus und wählt für diese "Add to PATH" und "Create Desktop Icon" aus.
