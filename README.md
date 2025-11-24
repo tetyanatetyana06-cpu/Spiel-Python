@@ -89,7 +89,65 @@ Was ist ein 'Dictionary' in Python?
 4. Ein Datentyp für Texte
 Deine Auswahl:
 
+Würde man die richtige Antwort eingeben, würde die Kategorie als bestanden gezählt werden und man würde zu einem veränderten Menü weitergeleitet werden:
+
+=== Kategorien-Menü ===
+Aktueller Punktestand: 1 | Gesamtversuche: 1
+1. Überraschung (Score: 0, Versuche: 0, Status: pending)
+2. Programmierung (Score: 1, Versuche: 1, Status: completed)
+3. BWL (Score: 0, Versuche: 0, Status: pending)
+4. Marketing (Score: 0, Versuche: 0, Status: pending)
+5. Beenden
+6. Neustart
+Bitte wählen:
+
+Würde man die falsche Antwort eingeben, würde man zu einer weiteren Frage innerhalb der Kategorie weitergeleitet werden:
+
+
+Wofür wird eine Funktion in Python verwendet?
+1. Um Daten dauerhaft zu speichern
+2. Um wiederverwendbaren Code zu erstellen
+3. Um Dateien zu öffnen
+4. Um Programme zu beenden
+Deine Auswahl:
+
+Wenn man diese Aufgabe ebenfalls falsch hat, kriegt man noch eine weitere Frage innerhalb der Kategorie, doch hat man auch sie falsch,
+fällt man in der Kategorie mit 0 Punkten durch und wird zurück zum leicht veränderten hauptmenü weitergeleitet und kann die nächste kategorie auswählen.
+So würde das aussehen:
+
+=== Kategorien-Menü ===
+Aktueller Punktestand: 0 | Gesamtversuche: 3
+1. Überraschung (Score: 0, Versuche: 0, Status: pending)
+2. Programmierung (Score: 0, Versuche: 3, Status: failed)
+3. BWL (Score: 0, Versuche: 0, Status: pending)
+4. Marketing (Score: 0, Versuche: 0, Status: pending)
+5. Beenden
+6. Neustart
+Bitte wählen:
+
 Wenn man alle Kategorien abgearbeitet hat, kann man die Zahl "5" eingeben, um das Quiz zu beenden. Um einen erneuten Druchlauf zu starten, klickt man wieder
 auf das "Run Python File" Zeichen. Man kann auch die Zahl "6" eingeben, was die Daten des bisherigen Durchlaufs während des Durchlaufs löscht, und einen Neuen anfängt,
 ohne die verloren gegangenen Daten in die Bewertung mitzuzählen.
+
+Die Aswertung des Quizergebnis könnte beispielsweise wie folgt aussehen:
+
+Quiz beendet.
+Endergebnis: 2 Punkte bei 8 Versuchen.
+
+=== Übersicht pro Kategorie ===
+Überraschung: 1 Punkte bei 1 Versuchen (Status: completed)
+Programmierung: 0 Punkte bei 3 Versuchen (Status: failed)
+BWL: 1 Punkte bei 1 Versuchen (Status: completed)
+Marketing: 0 Punkte bei 3 Versuchen (Status: failed)
+
+Unser Quiz dient der Klausurvorbereitung in einem spaßigen Format.
+
+
+
+Mitwirkende an dem Quiz:
+
+Lead Developer: Sarah Friedmann
+Testverantwortliche: Tetiana Martyniuk
+Dokumentationsverantwortliche: Darja Scherbina
+Präsentationsverantwortliche: Javeria Mohammad
 
