@@ -50,19 +50,19 @@ haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet.
 
 
    2.3 Installationsanleitung Visual Studio Code: <br>
-    Windows
+    Windows <br>
     Man begibt sich zu https://code.visualstudio.com/ und lädt den Installer für Windows herunter.
     Daraufhin führt man die heruntrgeladene .exe Datei aus und wählt für diese "Add to PATH" und "Create Desktop Icon" aus.
     Anschließend klickt man auf "Install". Nun kann man VS Code über das Startmenü öffnen.
 
-    macOS
+    macOS <br>
     Man begibt sich zu https://code.visualstudio.com/ und lädt die .zip Datei für macOS herunter.
     Jetzt entpackt man die Datei und verschiebt sie in den Ordner "Programme". Nun kann man VS Code aus dem Programme Ordner oder
     über das Spotlight öffnen.
 
  
 
-    2.4 Installationsanleitung des Quiz am Beispiel von Visual Studio Code:
+    2.4 Installationsanleitung des Quiz am Beispiel von Visual Studio Code: <br>
     
     Man öffnet Visual Studio Code und klickt auf das Account-icon in der Status-Leiste. Dort kann man "Sign in to GitHub"
     auswählen. Ist dies nicht vorhanden, kann man auf die Suchleiste in Visual Studio Code klicken und dort "GitHub" eingeben.
@@ -72,7 +72,7 @@ haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet.
     Zeichen und man wird zu der Visual Studio Code Desktop App weitergeleitet.
     Dort kann man per Klick auf das Account-Icon überprüfen können, ob man eingeloggt ist.
 
-    Repository Clonen:
+    Repository Clonen: <br>
     
     Man klickt auf den grünen Code Button in der "Code" Abteilung von GitHub. Dort kopiert man die URL des Repositorys
     und öffnet die Visual Studio Code App. Man wählt ganz links das Source Control-Zeichen in der Leiste aus und klickt auf das blaue
@@ -81,7 +81,7 @@ haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-3. Ausführen des Quiz:
+3. Ausführen des Quiz: <br>
    
 Man wählt links im Explorer die main.py Datei aus. Diese ist die Datei, in der das eigentliche Quiz ausgeführt wird.
 Dauraufhin klickt man auf das "Run Python File" Zeichen (ein nach links zeigendes Dreieck), das sich rechts in der Tab-Leiste befindet,
@@ -163,7 +163,7 @@ Dies wäre eine beispielhafte Auswertung des Quiz.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-4. Mitwirkende am Quiz:
+4. Mitwirkende am Quiz: <br>
 
   Lead Developer: Sarah Friedmann
   Testverantwortliche: Tetiana Martyniuk
