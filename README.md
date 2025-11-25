@@ -69,7 +69,7 @@ haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet.
     wird zu der Online-Seite weitergeleitet, wo man Visual Studio Code authorisieren muss. Es sollte eine Box mit dem 
     eigenen GitHub-Account auftauchen, wo man auf das grüne Feld "Continue" klickt. Daraufhin erscheint das Visual Studio Code 
     Zeichen und man wird zu der Visual Studio Code Desktop App weitergeleitet.
-    Dort kann man per Klick auf das Account-Icon überprüfen können, ob man eingeloggt ist.
+    Dort kann man per Klick auf das Account-Icon überprüfen können, ob man eingeloggt ist. <br>
    Repository Clonen:
     Man klickt auf den grünen Code Button in der "Code" Abteilung von GitHub. Dort kopiert man die URL des Repositorys
     und öffnet die Visual Studio Code App. Man wählt ganz links das Source Control-Zeichen in der Leiste aus und klickt auf das blaue
