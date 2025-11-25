@@ -63,7 +63,6 @@ haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet.
  
 
    2.4 Installationsanleitung des Quiz am Beispiel von Visual Studio Code: <br>
-    
     Man öffnet Visual Studio Code und klickt auf das Account-icon in der Status-Leiste. Dort kann man "Sign in to GitHub"
     auswählen. Ist dies nicht vorhanden, kann man auf die Suchleiste in Visual Studio Code klicken und dort "GitHub" eingeben.
     Als eins der Ergebnisse sollte ein blaues Feld mit "sign in to sync settings" auftauchen, welches man auswählt. Man
