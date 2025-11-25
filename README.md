@@ -29,9 +29,9 @@ haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 2. Voraussetzungen und Installation <br>
   2.1 Voraussetzungen für das Durchlaufen des Quiz: <br>
-  -Python Version 3.13.2 muss auf dem Rechner installiert sein.
-  -Visual Studion Code, bzw eine andere Code-Editor Software, muss auf dem Rechner installiert sein.
-  -Es muss ein GitHub-Account vorhanden sein, der mit dem Code-Editor-Programm verbunden ist.
+  -Python Version 3.13.2 muss auf dem Rechner installiert sein. <br>
+  -Visual Studion Code, bzw eine andere Code-Editor Software, muss auf dem Rechner installiert sein. <br>
+  -Es muss ein GitHub-Account vorhanden sein, der mit dem Code-Editor-Programm verbunden ist. <br>
 
 
    2.2 Installationsanleitung Python 3.13.2: <br>
