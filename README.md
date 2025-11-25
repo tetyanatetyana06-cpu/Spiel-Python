@@ -55,7 +55,7 @@ haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet.
     Daraufhin führt man die heruntrgeladene .exe Datei aus und wählt für diese "Add to PATH" und "Create Desktop Icon" aus.
     Anschließend klickt man auf "Install". Nun kann man VS Code über das Startmenü öffnen.
 
-    macOS 
+    "macOS" 
     Man begibt sich zu https://code.visualstudio.com/ und lädt die .zip Datei für macOS herunter.
     Jetzt entpackt man die Datei und verschiebt sie in den Ordner "Programme". Nun kann man VS Code aus dem Programme Ordner oder
     über das Spotlight öffnen.
