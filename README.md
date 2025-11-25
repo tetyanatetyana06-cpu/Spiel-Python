@@ -27,16 +27,14 @@ Unser Projekt wurde mithilfe von GitHub, Visual Studio Code und Pycharm erstellt
 haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet. 
   
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 2. Voraussetzungen und Installation <br>
   2.1 Voraussetzungen für das Durchlaufen des Quiz: <br>
-
   -Python Version 3.13.2 muss auf dem Rechner installiert sein.
   -Visual Studion Code, bzw eine andere Code-Editor Software, muss auf dem Rechner installiert sein.
   -Es muss ein GitHub-Account vorhanden sein, der mit dem Code-Editor-Programm verbunden ist.
 
 
-  2.2 Installationsanleitung Python 3.13.2: <br>
+   2.2 Installationsanleitung Python 3.13.2: <br>
    Windows <br>
    Man geht auf die offzielle Python Website (Python.org) und geht zu python.org/downloads.
    Daraufhin wählt man Python 3.13.2 aus und lädt den Installer für Windows herunter.Nun kann man die .exe Datei ausführen,
