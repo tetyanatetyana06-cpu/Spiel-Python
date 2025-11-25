@@ -70,8 +70,7 @@ haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet.
     eigenen GitHub-Account auftauchen, wo man auf das grüne Feld "Continue" klickt. Daraufhin erscheint das Visual Studio Code 
     Zeichen und man wird zu der Visual Studio Code Desktop App weitergeleitet.
     Dort kann man per Klick auf das Account-Icon überprüfen können, ob man eingeloggt ist.
-    
-    Repository Clonen: <br>
+   Repository Clonen:
     Man klickt auf den grünen Code Button in der "Code" Abteilung von GitHub. Dort kopiert man die URL des Repositorys
     und öffnet die Visual Studio Code App. Man wählt ganz links das Source Control-Zeichen in der Leiste aus und klickt auf das blaue
     Feld "Clone Repository". Jetzt kann man in die Suchleiste oben in der Mitte der Benutzeroberfläche die URL hineinkopieren und 
