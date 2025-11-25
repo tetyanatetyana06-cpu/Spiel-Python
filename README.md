@@ -50,12 +50,13 @@ haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet.
 
 
    2.3 Installationsanleitung Visual Studio Code: <br>
+    
     Windows <br>
     Man begibt sich zu https://code.visualstudio.com/ und lädt den Installer für Windows herunter.
     Daraufhin führt man die heruntrgeladene .exe Datei aus und wählt für diese "Add to PATH" und "Create Desktop Icon" aus.
     Anschließend klickt man auf "Install". Nun kann man VS Code über das Startmenü öffnen.
-    
-    macOS 
+
+    macOS <br>
     Man begibt sich zu https://code.visualstudio.com/ und lädt die .zip Datei für macOS herunter.
     Jetzt entpackt man die Datei und verschiebt sie in den Ordner "Programme". Nun kann man VS Code aus dem Programme Ordner oder
     über das Spotlight öffnen.
