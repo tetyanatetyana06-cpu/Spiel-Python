@@ -9,7 +9,8 @@ Inhaltsverzeichnis:
   2.3 Installationsanleitung Visual Studio Code
   2.4 Installationsanleitung des Quiz am Beisiel von Visual Studio Code
 3. Ausführen des Quiz
-4. Mitwirkende am Quiz
+4. Testen des Programms mit Pytest
+5. Mitwirkende am Quiz
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
    
@@ -159,8 +160,19 @@ Dies wäre eine beispielhafte Auswertung des Quiz.
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
+4.Testen des Programms mit Pytest:
+Für den Fall, dass Sie das Quiz auf Fehler im Code testen wollen, können Sie dies mit Pytest tun. <br>
+Man wähle eine der Testdateien links in der Explorerleiste innerhalb des „tests“-Ordners aus. Daraufhin geht man NICHT 
+auf den „Run Python File“-Button, sondern öffnet ein Terminal, indem man in der obersten Leiste die drei Punkte zwischen 
+„Run“ und dem Pfeil nach links auswählt, dann „Terminal“ und dann „New Terminal“ auswählt.
+Alternativ kann man ein bestehendes Terminal unten rechts neben dem Terminalfeld auswählen, die alle „Python“ heißen.<br>
+Daraufhin schreibt man in das Terminal „pytest -v“ rein, und die Dateien werden getestet. Eine Fehleranalyse sollte in dem Terminal auftauchen.
 
-4. Mitwirkende am Quiz: <br>
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+5. Mitwirkende am Quiz: <br>
 
   Lead Developer: Sarah Friedmann
   Testverantwortliche: Tetiana Martyniuk
