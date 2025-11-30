@@ -79,50 +79,50 @@ haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet.
 
 classDiagram
 
-class UngueltigeAuswahlError {
-    <<Exception>>
-}
+class UngueltigeAuswahlError { <br>
+    << Exception >> <br>
+} <br>
 
-class Frage {
-    - text: str
-    - antworten: List[str]
-    - richtige_antwort: int
-    + init(text, antworten, richtige_antwort)
-    + anzeigen()
-    + pruefe_antwort(auswahl: int) bool
-}
+class Frage { <br>
+    - text: str <br>
+    - antworten: List[str] <br>
+    - richtige_antwort: int <br>
+    + init(text, antworten, richtige_antwort) <br>
+    + anzeigen() <br>
+    + pruefe_antwort(auswahl: int) bool <br>
+} <br>
 
-class FrageOhneIndex {
-    - text: str
-    - richtige_antwort: str
-    + init(text, richtige_antwort)
-    + stellen() bool
-}
+class FrageOhneIndex { <br>
+    - text: str <br>
+    - richtige_antwort: str <br>
+    + init(text, richtige_antwort) <br>
+    + stellen() bool <br>
+} <br>
 
-class Category {
-    - name: str
-    - fragen: List[Frage | FrageOhneIndex]
-    - score: int
-    - attempts: int
-    - failed_attempts: int
-    - status: str
-    + init(name, fragen)
-    + play_category() int
-}
+class Category { <br>
+    - name: str <br>
+    - fragen: List[Frage | FrageOhneIndex] <br>
+    - score: int <br>
+    - attempts: int <br>
+    - failed_attempts: int <br>
+    - status: str <br>
+    + init(name, fragen) <br>
+    + play_category() int <br>
+} <br>
 
-class main {
-    - erzeugt Kategorien: Category
-    - ruft play_category() auf
-    - verwaltet Gesamtpunkte
-    - Eingabe-/Auswahl-
-}
+class main { <br>
+    - erzeugt Kategorien: Category <br>
+    - ruft play_category() auf <br>
+    - verwaltet Gesamtpunkte <br>
+    - Eingabe-/Auswahl- <br>
+} <br>
 
-UngueltigeAuswahlError <|-- Frage
-UngueltigeAuswahlError <|-- FrageOhneIndex
+UngueltigeAuswahlError <|-- Frage <br> 
+UngueltigeAuswahlError <|-- FrageOhneIndex <br>
 
-Frage --> main
-FrageOhneIndex --> Category
-Category --> main
+Frage --> main <br>
+FrageOhneIndex --> Category <br>
+Category --> main <br>
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
