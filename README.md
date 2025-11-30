@@ -221,8 +221,8 @@ Daraufhin schreibt man in das Terminal „pytest -v“ rein, und die Dateien wer
 
 6. Mitwirkende am Quiz: <br>
 
-  Lead Developer: Sarah Friedmann
-  Testverantwortliche: Tetiana Martyniuk
-  Dokumentationsverantwortliche: Darja Scherbina
+  Lead Developer: Sarah Friedmann <br>
+  Testverantwortliche: Tetiana Martyniuk <br>
+  Dokumentationsverantwortliche: Darja Scherbina <br>
   Präsentationsverantwortliche: Javeria Mohammad
 
