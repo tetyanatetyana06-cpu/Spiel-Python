@@ -143,8 +143,8 @@ Aktueller Punktestand: 0 | Gesamtversuche: 0
 6. Neustart
 Bitte wählen:
 
-Dies ist das Menü unseres Quiz. Mit der Eingabe einer Zahl von 1-4, hinter dem "Bitte wählen." direkt im Terminal, kann man eine beliebige Kategorie auswählen.
-Als Beispiel: Folgendes sollte auftauchen, wenn man die Zahl "2" eingibt:
+Dies ist das Menü unseres Quiz. Mit der Eingabe einer Zahl von 1-4, direkt hinter dem "Bitte wählen" im Terminal kann man eine beliebige Kategorie auswählen.
+Beispiel: Folgendes sollte erscheinen, wenn man die Zahl "2" eingibt:
 
 Kategorie: Programmierung
 Was ist ein 'Dictionary' in Python?
@@ -154,7 +154,7 @@ Was ist ein 'Dictionary' in Python?
 4. Ein Datentyp für Texte
 Deine Auswahl:
 
-Würde man die richtige Antwort eingeben, würde die Kategorie als bestanden gezählt werden und man würde zu einem veränderten Menü weitergeleitet werden:
+Gibt man die richtige Antwort ein, wird die Kategorie als bestanden gezählt und man wird zu einem veränderten Menü weitergeleitet:
 
 === Kategorien-Menü ===
 Aktueller Punktestand: 1 | Gesamtversuche: 1
@@ -166,7 +166,7 @@ Aktueller Punktestand: 1 | Gesamtversuche: 1
 6. Neustart
 Bitte wählen:
 
-Würde man die falsche Antwort eingeben, würde man zu einer weiteren Frage innerhalb der Kategorie weitergeleitet werden:
+Gibt man die falsche Antwort ein, wird man zu einer Frage innerhalb der Kategorie weitergeleitet:
 
 
 Wofür wird eine Funktion in Python verwendet?
@@ -176,9 +176,9 @@ Wofür wird eine Funktion in Python verwendet?
 4. Um Programme zu beenden
 Deine Auswahl:
 
-Wenn man diese Aufgabe ebenfalls falsch hat, kriegt man noch eine weitere Frage innerhalb der Kategorie, doch hat man auch sie falsch,
-fällt man in der Kategorie mit 0 Punkten durch und wird zurück zum leicht veränderten hauptmenü weitergeleitet und kann die nächste kategorie auswählen.
-So würde das aussehen:
+Wenn man auch diese Aufgabe falsch beantwortet, bekommt man noch eine weitere Frage innerhalb der Kategorie. Hat man auch diese falsch,
+fällt man in der Kategorie mit 0 Punkten durch und wird zurück zum leicht veränderten hauptmenü weitergeleitet, um die nächste kategorie auswählen.
+So sieht das aus:
 
 === Kategorien-Menü ===
 Aktueller Punktestand: 0 | Gesamtversuche: 3
@@ -191,8 +191,7 @@ Aktueller Punktestand: 0 | Gesamtversuche: 3
 Bitte wählen:
 
 Wenn man alle Kategorien abgearbeitet hat, kann man die Zahl "5" eingeben, um das Quiz zu beenden. Um einen erneuten Druchlauf zu starten, klickt man wieder
-auf das "Run Python File" Zeichen. Man kann auch die Zahl "6" eingeben, was die Daten des bisherigen Durchlaufs während des Durchlaufs löscht, und einen Neuen anfängt,
-ohne die verloren gegangenen Daten in die Bewertung mitzuzählen.
+auf das "Run Python File"-Symbol. Man kann auch die Zahl "6" eingeben, wodurch die Daten des bisherigen Durchlaufs gelöscht werden und ein neuer Durchlauf beginnt, ohne die vorherigen Ergebnisse in die Bewertung einzubeziehen.
 
 
 Quiz beendet.
@@ -209,11 +208,11 @@ Dies wäre eine beispielhafte Auswertung des Quiz.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 5.Testen des Programms mit Pytest:
-Für den Fall, dass Sie das Quiz auf Fehler im Code testen wollen, können Sie dies mit Pytest tun. <br>
-Man wähle eine der Testdateien links in der Explorerleiste innerhalb des „tests“-Ordners aus. Daraufhin geht man NICHT 
-auf den „Run Python File“-Button, sondern öffnet ein Terminal, indem man in der obersten Leiste die drei Punkte zwischen 
-„Run“ und dem Pfeil nach links auswählt, dann „Terminal“ und dann „New Terminal“ auswählt.
-Alternativ kann man ein bestehendes Terminal unten rechts neben dem Terminalfeld auswählen, die alle „Python“ heißen.<br>
+Falls Sie das Quiz auf Fehler im Code testen möchten, können Sie dies mit Pytest tun. <br>
+Wählen Sie eine der Testdateien links in der Explorer-leiste innerhalb des „tests“-Ordners aus. Daraufhin gehen Sie NICHT 
+auf den „Run Python File“-Button, sondern öffnen ein Terminal, indem Sie in der obersten Leiste die drei Punkte zwischen 
+„Run“ und dem Pfeil nach links auswählen, dann „Terminal“ und dann „New Terminal“.
+Alternativ können Sie ein bestehendes Terminal unten rechts neben dem Terminalfeld auswählen, die alle „Python“ heißen.<br>
 Daraufhin schreibt man in das Terminal „pytest -v“ rein, und die Dateien werden getestet. Eine Fehleranalyse sollte in dem Terminal auftauchen.
 
 
