@@ -3,27 +3,27 @@
 
 Inhaltsverzeichnis:
 1. Projektbeschreibung
-2. Voraussetzung und Installation
-  2.1 Voraussetzungen für das Durchlaufen des Quiz
-  2.2 Installationsanleitung Python 3.13.2
-  2.3 Installationsanleitung Visual Studio Code
-  2.4 Installationsanleitung des Quiz am Beisiel von Visual Studio Code
-3. Ausführen des Quiz
-4. Testen des Programms mit Pytest
-5. Mitwirkende am Quiz
+2. Voraussetzung und Installation <br>
+  2.1 Voraussetzungen für das Durchlaufen des Quiz <br>
+  2.2 Installationsanleitung Python 3.13.2 <br>
+  2.3 Installationsanleitung Visual Studio Code <br>
+  2.4 Installationsanleitung des Quiz am Beisiel von Visual Studio Code<br>
+3. Klassendiagramm
+4. Ausführen des Quiz
+5. Testen des Programms mit Pytest
+6. Mitwirkende am Quiz
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
    
 1. Projektbeschreibung: <br>
-Ein Quiz, was unsere Komilitonen helfen soll, ihr Wissen zu zwei unserer Prüfungsfächer aufzufrischen. 
-Das Quiz beinhaltet Multipe-Choice-Fragen, sowie Rechenaufgaben und eine kleine Spaß-Kategorie, die Fragen stellt,
-welche nichts mit Uni-Inhalten gemein haben.
+Ein Quiz, was unseren Kommilitonen helfen soll, ihr Wissen zu zwei unserer Prüfungsfächer aufzufrischen. 
+Das Quiz beinhaltet Multipe-Choice-Fragen sowie Rechenaufgaben und eine kleine Spaß-Kategorie mit Fragen, die nichts mit Uni-Inhalten zu tun haben.
 Das Quiz besteht aus vier Kategorien, die in beliebiger Reihenfolge abgearbeitet werden können. Jede Kategorie enthält
 maximal drei Fragen. Beantwortet der Nutzer die erste Frage richtig, besteht er die Kategorie. Hat der Benutzer eine Frage falsch beantwortet, 
 hat er noch zwei weitere Versuche mit zwei anderen Fragen, bevorer in der Kategorie druchfällt. Am Ende des Quiz wird das Ergebnis des 
 Benutzers ausgewertet. Man kann das Quiz auch während des Versuchs neustarten, wobei alle bisherigen Eingaben des Durchlaufs gelöscht werden.
 
-Unser Projekt wurde mithilfe von GitHub, Visual Studio Code und Pycharm erstellt. ZUr Unterstützung unserer Arbeit
+Unser Projekt wurde mithilfe von GitHub, Visual Studio Code und Pycharm erstellt. Zur Unterstützung unserer Arbeit
 haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet. 
   
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -36,27 +36,27 @@ haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet.
 
    2.2 Installationsanleitung Python 3.13.2: <br>
    Windows <br>
-   Man geht auf die offzielle Python Website (Python.org) und geht zu python.org/downloads.
-   Daraufhin wählt man Python 3.13.2 aus und lädt den Installer für Windows herunter.Nun kann man die .exe Datei ausführen,
-   wobei es wichtig ist die Option "Add Python to PATH" auszuwählen, und dann klickt man auf Install Now.
-   Jetzt öffnet man das Rechnerterminal und prüft mit "python --version", ob der Download erfolgreich war.
+   Man geht auf die offzielle Python Website (Python.org) und navigiert zu python.org/downloads.
+   Daraufhin wählt man Python 3.13.2 aus und lädt den Installer für Windows herunter. Nun kann man die .exe Datei ausführen,
+   wobei es wichtig ist, die Option "Add Python to PATH" auszuwählen. Danach klickt man auf Install Now.
+   Jetzt öffnet man das Rechnerterminal und prüft mit "python --version", ob die Installation erfolgreich war.
 
    macOS <br>
-   Für macOS empfiehlt es sich homebrew zu verwenden. Dort tippt man "brew install python@3.13" ein, und danach passt man es mit
+   Für macOS empfiehlt es sich, Homebrew zu verwenden. Dort tippt man "brew install python@3.13" ein, und passt es an mit:
    "echo 'export PATH="/usr/local/opt/python@3.13/bin:$PATH"' >> ~/.zshrc
-    source ~/.zshrc" an.
-   Alternativ kann man sich auch das macOS-Paket von Python herunterladen und installieren.
+    source ~/.zshrc"
+   Alternativ kann man auch das macOS-Paket von Python herunterladen und installieren.
 
 
    2.3 Installationsanleitung Visual Studio Code: <br>
    Windows <br>
     Man begibt sich zu https://code.visualstudio.com/ und lädt den Installer für Windows herunter.
-    Daraufhin führt man die heruntrgeladene .exe Datei aus und wählt für diese "Add to PATH" und "Create Desktop Icon" aus.
+    Daraufhin führt man die heruntrgeladene .exe Datei aus und wählt die Option "Add to PATH" und "Create Desktop Icon" aus.
     Anschließend klickt man auf "Install". Nun kann man VS Code über das Startmenü öffnen.
 
    macOS <br>
     Man begibt sich zu https://code.visualstudio.com/ und lädt die .zip Datei für macOS herunter.
-    Jetzt entpackt man die Datei und verschiebt sie in den Ordner "Programme". Nun kann man VS Code aus dem Programme Ordner oder
+    Jetzt entpackt man die Datei und verschiebt sie in den Ordner "Programme". Nun kann man VS Code aus dem Programme- Ordner oder
     über das Spotlight öffnen.
 
  
@@ -64,24 +64,74 @@ haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet.
    2.4 Installationsanleitung des Quiz am Beispiel von Visual Studio Code: <br>
     Man öffnet Visual Studio Code und klickt auf das Account-icon in der Status-Leiste. Dort kann man "Sign in to GitHub"
     auswählen. Ist dies nicht vorhanden, kann man auf die Suchleiste in Visual Studio Code klicken und dort "GitHub" eingeben.
-    Als eins der Ergebnisse sollte ein blaues Feld mit "sign in to sync settings" auftauchen, welches man auswählt. Man
+    Als eines der Ergebnisse sollte ein blaues Feld mit "Sign in to sync settings" auftauchen, das man auswählt. Man
     wird zu der Online-Seite weitergeleitet, wo man Visual Studio Code authorisieren muss. Es sollte eine Box mit dem 
-    eigenen GitHub-Account auftauchen, wo man auf das grüne Feld "Continue" klickt. Daraufhin erscheint das Visual Studio Code 
-    Zeichen und man wird zu der Visual Studio Code Desktop App weitergeleitet.
+    eigenen GitHub-Account auftauchen, in der man auf das grüne Feld "Continue" klickt. Danach erscheint das Visual Studio Code-Symbol und man wird zu der Visual Studio Code Desktop App weitergeleitet.
     Dort kann man per Klick auf das Account-Icon überprüfen können, ob man eingeloggt ist. <br>
    Repository Clonen:
-    Man klickt auf den grünen Code Button in der "Code" Abteilung von GitHub. Dort kopiert man die URL des Repositorys
-    und öffnet die Visual Studio Code App. Man wählt ganz links das Source Control-Zeichen in der Leiste aus und klickt auf das blaue
-    Feld "Clone Repository". Jetzt kann man in die Suchleiste oben in der Mitte der Benutzeroberfläche die URL hineinkopieren und 
+    Man klickt auf den grünen Code Button in der "Code"-Abteilung von GitHub. Dort kopiert man die URL des Repositorys
+    und öffnet die Visual Studio Code App. Man wählt ganz links das Source-Control-Symbol in der Leiste aus und klickt auf das blaue
+    Feld "Clone Repository". Jetzt kann man in die Suchleiste oben in der Mitte der Benutzeroberfläche die URL einfügen und 
     die Projektstruktur sollte links im Explorer auftauchen.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
+3. Klassendiagramm
 
-3. Ausführen des Quiz: <br>
+classDiagram
+
+class UngueltigeAuswahlError {
+    <<Exception>>
+}
+
+class Frage {
+    - text: str
+    - antworten: List[str]
+    - richtige_antwort: int
+    + init(text, antworten, richtige_antwort)
+    + anzeigen()
+    + pruefe_antwort(auswahl: int) bool
+}
+
+class FrageOhneIndex {
+    - text: str
+    - richtige_antwort: str
+    + init(text, richtige_antwort)
+    + stellen() bool
+}
+
+class Category {
+    - name: str
+    - fragen: List[Frage | FrageOhneIndex]
+    - score: int
+    - attempts: int
+    - failed_attempts: int
+    - status: str
+    + init(name, fragen)
+    + play_category() int
+}
+
+class main {
+    - erzeugt Kategorien: Category
+    - ruft play_category() auf
+    - verwaltet Gesamtpunkte
+    - Eingabe-/Auswahl-
+}
+
+UngueltigeAuswahlError <|-- Frage
+UngueltigeAuswahlError <|-- FrageOhneIndex
+
+Frage --> main
+FrageOhneIndex --> Category
+Category --> main
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+4. Ausführen des Quiz: <br>
    
-Man wählt links im Explorer die main.py Datei aus. Diese ist die Datei, in der das eigentliche Quiz ausgeführt wird.
-Dauraufhin klickt man auf das "Run Python File" Zeichen (ein nach links zeigendes Dreieck), das sich rechts in der Tab-Leiste befindet,
-im oberen Bereich des Bildschirms. Nun sollte unten im Terminal folgendes Auftauchen:
+Man wählt links im Explorer die main.py-Datei aus. Diese ist die Datei, in der das eigentliche Quiz ausgeführt wird.
+Dauraufhin klickt man auf das "Run Python File"-Symbol (ein nach links zeigendes Dreieck), das sich rechts in der Tab-Leiste
+im oberen Bereich des Bildschirms befindet. Nun sollte unten im Terminal Folgendes erscheinen:
 
 === Kategorien-Menü ===
 Aktueller Punktestand: 0 | Gesamtversuche: 0
@@ -158,7 +208,7 @@ Dies wäre eine beispielhafte Auswertung des Quiz.
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
-4.Testen des Programms mit Pytest:
+5.Testen des Programms mit Pytest:
 Für den Fall, dass Sie das Quiz auf Fehler im Code testen wollen, können Sie dies mit Pytest tun. <br>
 Man wähle eine der Testdateien links in der Explorerleiste innerhalb des „tests“-Ordners aus. Daraufhin geht man NICHT 
 auf den „Run Python File“-Button, sondern öffnet ein Terminal, indem man in der obersten Leiste die drei Punkte zwischen 
@@ -170,7 +220,7 @@ Daraufhin schreibt man in das Terminal „pytest -v“ rein, und die Dateien wer
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-5. Mitwirkende am Quiz: <br>
+6. Mitwirkende am Quiz: <br>
 
   Lead Developer: Sarah Friedmann
   Testverantwortliche: Tetiana Martyniuk
