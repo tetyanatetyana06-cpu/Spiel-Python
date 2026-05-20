@@ -2,8 +2,8 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 
 from src.logic import QuizEngine, DEFAULT_TIME_LIMIT_SECONDS
-from src.question import Frage
-from src.frage_ohne_index import FrageOhneIndex
+from src.question_old import Frage
+from src.frage_ohne_index_cli import FrageOhneIndex
 
 try:
     from PIL import Image, ImageTk  # optional

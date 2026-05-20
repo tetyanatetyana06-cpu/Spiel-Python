@@ -1,5 +1,5 @@
 import pytest
-from src.question import Frage
+from src.question_old import Frage
 
 @pytest.fixture
 def frage():
