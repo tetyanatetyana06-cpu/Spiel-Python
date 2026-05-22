@@ -1,7 +1,7 @@
 
 from typing import List
-from src.question import Frage
-from src.frage_ohne_index import FrageOhneIndex
+from src.question_old import Frage
+from src.frage_ohne_index_cli import FrageOhneIndex
 
 class UngueltigeAuswahlError(Exception):
     """Wird ausgelöst, wenn die Eingabe außerhalb des gültigen Bereichs liegt."""

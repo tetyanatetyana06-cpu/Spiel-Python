@@ -1,7 +1,7 @@
 import pytest
 from src.category import Category, UngueltigeAuswahlError
-from src.question import Frage
-from src.frage_ohne_index import FrageOhneIndex
+from src.question_old import Frage
+from src.frage_ohne_index_cli import FrageOhneIndex
 
 
 def make_category_with_three_questions():

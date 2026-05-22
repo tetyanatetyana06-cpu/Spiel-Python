@@ -1,6 +1,6 @@
 
 import pytest
-from src.question import Frage
+from src.question_old import Frage
 from src.category import Category
 
 @pytest.fixture
