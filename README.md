@@ -1,5 +1,7 @@
 "Bist du gut vorbereitet?" - das Klausurvorbereitungsquiz
 
+#Notiz 23.05.2026: Es befindet sich eine GUI-Version des Quiz auf dem feature/gui branch.
+
 
 Inhaltsverzeichnis:
 1. Projektbeschreibung
