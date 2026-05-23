@@ -3,19 +3,16 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Optional, Union, Dict
 
-from src.question_old import Frage
-from src.frage_ohne_index_cli import FrageOhneIndex
+from src.question import Frage
+from src.frage_ohne_index import FrageOhneIndex
 from src.category import Category
 
 QuestionType = Union[Frage, FrageOhneIndex]
-DEFAULT_TIME_LIMIT_SECONDS = 15
+DEFAULT_TIME_LIMIT_SECONDS = 30
 
 
 def build_categories() -> List[Category]:
-    """
-    Kategorien & Fragen 1:1 aus deinem bisherigen main.py übernommen.
-    Optional kannst du image_path=... pro Frage ergänzen.
-    """
+  
     fragen_überraschung = [
         Frage("Wie heisst der laengste Fluss der Welt?", ["Amazonas", "Nil", "Mississippi", "Jangtsekiang"], 1),
         Frage("Welche Sprache hat die meisten Muttersprachler?", ["Englisch", "Mandarin", "Spanisch", "Hindi"], 1),
@@ -103,7 +100,6 @@ class QuizEngine:
       - bei erster richtiger Antwort: Kategorie completed + score++
       - bei falscher Antwort oder Timeout: failed_attempts++ und nächste Frage
       - wenn alle Fragen durch: Kategorie failed
-    [5](https://onedrive.live.com?cid=8BFBAD42D98CA7B7&id=8BFBAD42D98CA7B7!s374174c17b774cec8ac9bbd243df0b33)[1](https://onedrive.live.com?cid=8BFBAD42D98CA7B7&id=8BFBAD42D98CA7B7!s068fb32eedb44307865ccd53db2f63b1)
     """
 
     def __init__(self, categories: Optional[List[Category]] = None):
@@ -184,8 +180,8 @@ class QuizEngine:
         self.gesamt_versuche += 1
 
         kat.score += 1
+        kat.attempts += 1
         kat.status = "completed"
-        kat.attempts += self.versuche_in_runde
 
         return SubmitResult(True, "Richtige Antwort!", correct_choice, correct_text, True, kat.status)
 
@@ -197,10 +193,10 @@ class QuizEngine:
         self.gesamt_versuche += 1
 
         kat.failed_attempts += 1
+        kat.attempts += 1
 
         if self.current_index + 1 >= len(kat.fragen):
             kat.status = "failed"
-            kat.attempts += self.versuche_in_runde
             return SubmitResult(False, reason, correct_choice, correct_text, True, kat.status)
 
         self.current_index += 1

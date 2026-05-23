@@ -2,14 +2,8 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 
 from src.logic import QuizEngine, DEFAULT_TIME_LIMIT_SECONDS
-from src.question_old import Frage
-from src.frage_ohne_index_cli import FrageOhneIndex
-
-try:
-    from PIL import Image, ImageTk  # optional
-except Exception:
-    Image = None
-    ImageTk = None
+from src.question import Frage
+from src.frage_ohne_index import FrageOhneIndex
 
 
 class QuizGUI:
@@ -19,35 +13,94 @@ class QuizGUI:
         self.time_limit_seconds = time_limit_seconds
 
         self.root.title("Quiz (GUI)")
-        self.root.geometry("920x560")
-        self.root.minsize(860, 520)
+        self.root.geometry("1040x720")
+        self.root.minsize(980, 680)
+        self.root.configure(bg="#f4f7fb")
 
         # Theme / Style
-        style = ttk.Style()
-        try:
-            style.theme_use("clam")
-        except Exception:
-            pass
+        self._apply_theme()
 
-        self.main = ttk.Frame(self.root, padding=12)
+        self.main = ttk.Frame(self.root, padding=18, style="Main.TFrame")
         self.main.pack(fill="both", expand=True)
+
+        self.bg_canvas = tk.Canvas(self.root, highlightthickness=0, bd=0, bg="#f4f7fb")
+        self.bg_canvas.place(relx=0, rely=0, relwidth=1, relheight=1)
+        self.main.tkraise()
+        self.root.bind("<Configure>", self._on_root_configure)
 
         # Navigation / State
         self.timer_after_id = None
         self.remaining = 0
-        self.current_image = None  # keep reference
 
         # UI Frames
         self.start_frame = ttk.Frame(self.main)
         self.quiz_frame = ttk.Frame(self.main)
         self.result_frame = ttk.Frame(self.main)
 
+        self.category_bg_canvas = None
+
         self._build_start_frame()
         self._build_quiz_frame()
         self._build_result_frame()
 
+        self.root.update_idletasks()
+        self._draw_background_pattern()
         self.show_start()
 
+    def _apply_theme(self):
+        style = ttk.Style()
+        try:
+            style.theme_use("clam")
+        except Exception:
+            pass
+
+        style.configure("Main.TFrame", background="#f4f7fb")
+        style.configure("Card.TFrame", background="#ffffff", relief="flat")
+        style.configure("Accent.TButton", background="#60a5fa", foreground="#0b1120", font=("Segoe UI", 11, "bold"), padding=(18, 10), relief="flat")
+        style.configure("Neutral.TButton", background="#e0e7ff", foreground="#0b1120", font=("Segoe UI", 11, "bold"), padding=(16, 10), relief="flat")
+        style.configure("Completed.TButton", background="#cbd5e1", foreground="#475569", font=("Segoe UI", 11, "bold"), padding=(18, 10), relief="flat")
+        style.configure("Danger.TButton", background="#ef4444", foreground="#ffffff", font=("Segoe UI", 11, "bold"), padding=(16, 10), relief="flat")
+
+        style.configure("TLabel", background="#f4f7fb", foreground="#0f172a")
+        style.configure("TButton", font=("Segoe UI", 11), padding=(16, 10))
+        style.configure("TFrame", background="#f4f7fb")
+
+        style.configure("Treeview", background="#ffffff", fieldbackground="#ffffff", rowheight=30, font=("Segoe UI", 10))
+        style.configure("Treeview.Heading", font=("Segoe UI", 10, "bold"), background="#eef2ff", relief="flat")
+        style.map("Treeview.Heading", background=[("active", "#dbeafe")])
+        style.map("Accent.TButton", background=[("active", "#2563eb")], foreground=[("!disabled", "#ffffff")])
+        style.map("Neutral.TButton", background=[("active", "#bfdbfe")], foreground=[("!disabled", "#0f172a")])
+        style.map("Danger.TButton", background=[("active", "#dc2626")], foreground=[("!disabled", "#ffffff")])
+
+    def _on_root_configure(self, event):
+        if event.widget == self.root:
+            self._draw_background_pattern()
+
+    def _draw_background_pattern(self):
+        self.bg_canvas.delete("all")
+        w = max(self.root.winfo_width(), 1)
+        h = max(self.root.winfo_height(), 1)
+
+        self.bg_canvas.create_rectangle(0, 0, w, h, fill="#f6f8fd", outline="")
+        for y in range(0, h, 90):
+            shade = "#eef4ff" if (y // 90) % 2 == 0 else "#f9fbff"
+            self.bg_canvas.create_rectangle(0, y, w, y + 60, fill=shade, outline="")
+        blobs = [
+            (110, 90, 52, "#e8eaff"),
+            (305, 150, 76, "#e0f2fe"),
+            (700, 170, 64, "#fce7f3"),
+            (185, 430, 78, "#dcfce7"),
+            (550, 360, 48, "#fef3c7"),
+            (820, 470, 56, "#e0e7ff"),
+            (930, 120, 40, "#f5f3ff"),
+        ]
+        for x, y, r, color in blobs:
+            self.bg_canvas.create_oval(x - r, y - r, x + r, y + r, fill=color, outline="")
+
+        for x in range(0, w, 130):
+            self.bg_canvas.create_line(x, 0, x + 45, h, fill="#dbe9ff", width=1)
+        for x in range(0, w, 130):
+            self.bg_canvas.create_line(x, 0, x + 45, h, fill="#dbe9ff", width=1)
     # ----------------------------
     # Frame switching
     # ----------------------------
@@ -76,43 +129,51 @@ class QuizGUI:
     # START FRAME
     # ----------------------------
     def _build_start_frame(self):
-        top = ttk.Frame(self.start_frame)
+        top = ttk.Frame(self.start_frame, style="Card.TFrame", padding=12)
         top.pack(fill="x")
 
-        btn_menu = ttk.Menubutton(top, text="Menu")
+        btn_menu = ttk.Menubutton(top, text="Menü")
         btn_menu.pack(side="left", padx=(0, 8))
 
         menu = tk.Menu(btn_menu, tearoff=0)
-        menu.add_command(label="Neues Quiz starten", command=self._menu_new_quiz)
         menu.add_command(label="Quiz neu starten", command=self._menu_restart_quiz)
         menu.add_separator()
         menu.add_command(label="Quiz beenden", command=self._menu_quit)
         btn_menu["menu"] = menu
 
-        btn_infos = ttk.Button(top, text="Infos", command=self._open_infos)
+        btn_infos = ttk.Button(top, text="Infos", command=self._open_infos, style="Neutral.TButton")
         btn_infos.pack(side="left")
 
         # Header
-        header = ttk.Label(self.start_frame, text="Kategorien auswählen", font=("Segoe UI", 18, "bold"))
-        header.pack(anchor="w", pady=(14, 6))
+        header = ttk.Label(self.start_frame, text="Kategorien auswählen", font=("Segoe UI", 20, "bold"), foreground="#1d4ed8")
+        header.pack(anchor="w", pady=(16, 6))
 
-        self.score_label = ttk.Label(self.start_frame, text="", font=("Segoe UI", 11))
-        self.score_label.pack(anchor="w", pady=(0, 10))
+        self.score_label = ttk.Label(self.start_frame, text="", font=("Segoe UI", 11), foreground="#334155")
+        self.score_label.pack(anchor="w", pady=(0, 6))
 
         # Categories area
-        self.cat_container = ttk.Frame(self.start_frame)
-        self.cat_container.pack(fill="both", expand=True)
+        self.cat_container = ttk.Frame(self.start_frame, padding=(30, 28, 30, 28))
+        self.cat_container.pack(fill="both", expand=True, pady=(8, 0))
 
         bottom = ttk.Frame(self.start_frame)
-        bottom.pack(fill="x", pady=(10, 0))
+        bottom.pack(fill="x", pady=(8, 0))
 
-        self.btn_show_results = ttk.Button(bottom, text="Show Results", command=self.show_results)
+        self.btn_show_results = ttk.Button(bottom, text="Ergebnisse anzeigen", command=self.show_results, style="Accent.TButton")
         self.btn_show_results.pack(side="right")
 
     def _refresh_start_categories(self):
-        # Clear
         for w in self.cat_container.winfo_children():
-            w.destroy()
+            if w is not self.category_bg_canvas:
+                w.destroy()
+
+        if self.category_bg_canvas is not None:
+            self.category_bg_canvas.destroy()
+            self.category_bg_canvas = None
+
+        self.category_bg_canvas = tk.Canvas(self.cat_container, highlightthickness=0, bd=0, bg="#eef4ff")
+        self.category_bg_canvas.place(relx=0, rely=0, relwidth=1, relheight=1)
+        self.category_bg_canvas.bind("<Configure>", self._on_category_bg_configure)
+        self._draw_category_pattern()
 
         # Update stats label
         summary = self.engine.summary()
@@ -123,37 +184,71 @@ class QuizGUI:
         # Categories grid
         cats = self.engine.category_list()
 
-        grid = ttk.Frame(self.cat_container)
-        grid.pack(fill="both", expand=True)
+        grid_frame = ttk.Frame(self.cat_container)
+        grid_frame.place(relx=0.5, rely=0.5, anchor="center")
 
         cols = 2
+        grid_frame.columnconfigure(0, weight=1, minsize=320)
+        grid_frame.columnconfigure(1, weight=1, minsize=320)
+
         for i, cat in enumerate(cats):
             r = i // cols
             c = i % cols
 
-            card = ttk.Frame(grid, padding=10, relief="ridge")
-            card.grid(row=r, column=c, sticky="nsew", padx=8, pady=8)
+            card = ttk.Frame(grid_frame, padding=20, style="Card.TFrame", width=320, height=200)
+            card.grid(row=r, column=c, sticky="nsew", padx=10, pady=10)
+            card.grid_propagate(False)
 
-            title = ttk.Label(card, text=cat.name, font=("Segoe UI", 14, "bold"))
+            title = ttk.Label(card, text=cat.name, font=("Segoe UI", 14, "bold"), foreground="#1d4ed8")
             title.pack(anchor="w")
 
             meta = ttk.Label(
                 card,
-                text=f"Score: {cat.score} | Versuche: {cat.attempts} | Status: {cat.status}",
-                font=("Segoe UI", 10)
+                text=f"Punkte: {cat.score} | Versuche: {cat.attempts} | Status: {cat.status}",
+                font=("Segoe UI", 10),
+                foreground="#475569"
             )
-            meta.pack(anchor="w", pady=(2, 10))
+            meta.pack(anchor="w", pady=(3, 14))
 
-            btn = ttk.Button(card, text="Kategorie starten", command=lambda idx=i: self._start_category(idx))
-            btn.pack(anchor="e")
+            button_style = "Completed.TButton" if cat.status != "pending" else "Accent.TButton"
+            btn = ttk.Button(card, text="Kategorie starten", command=lambda idx=i: self._start_category(idx), style=button_style)
+            btn.pack(anchor="center", fill="x", pady=(8, 0))
 
             if cat.status != "pending":
                 btn.state(["disabled"])
 
-        for c in range(cols):
-            grid.columnconfigure(c, weight=1)
         for r in range((len(cats) + cols - 1) // cols):
-            grid.rowconfigure(r, weight=1)
+            grid_frame.rowconfigure(r, weight=1, minsize=220)
+
+    def _on_category_bg_configure(self, event):
+        if event.widget == self.category_bg_canvas:
+            self._draw_category_pattern()
+
+    def _draw_category_pattern(self):
+        if self.category_bg_canvas is None:
+            return
+
+        self.category_bg_canvas.delete("all")
+        w = max(self.cat_container.winfo_width(), 1)
+        h = max(self.cat_container.winfo_height(), 1)
+
+        self.category_bg_canvas.create_rectangle(0, 0, w, h, fill="#eef4ff", outline="")
+
+        for x in range(0, w, 110):
+            self.category_bg_canvas.create_line(x, 0, x + 50, h, fill="#dbeafe", width=1)
+
+        for y in range(0, h, 110):
+            self.category_bg_canvas.create_line(0, y, w, y + 40, fill="#e0f2fe", width=1)
+
+        blobs = [
+            (80, 70, 40, "#f5f3ff"),
+            (220, 120, 56, "#dbeafe"),
+            (360, 240, 42, "#e0f2fe"),
+            (580, 180, 48, "#fef3c7"),
+            (720, 320, 54, "#eef2ff"),
+        ]
+        for x, y, r, color in blobs:
+            self.category_bg_canvas.create_oval(x - r, y - r, x + r, y + r, fill=color, outline="")
 
     def _start_category(self, idx: int):
         ok = self.engine.select_category_by_index(idx)
@@ -168,56 +263,68 @@ class QuizGUI:
     def _open_infos(self):
         win = tk.Toplevel(self.root)
         win.title("Infos")
-        win.geometry("620x420")
+        win.geometry("660x460")
+        win.minsize(620, 420)
+        win.configure(bg="#f4f7fb")
         win.transient(self.root)
 
         nb = ttk.Notebook(win)
-        nb.pack(fill="both", expand=True, padx=10, pady=10)
+        nb.pack(fill="both", expand=True, padx=16, pady=(16, 10))
 
-        tab_rules = ttk.Frame(nb, padding=10)
-        tab_desc = ttk.Frame(nb, padding=10)
-        tab_hint = ttk.Frame(nb, padding=10)
+        tab_rules = ttk.Frame(nb, padding=16)
+        tab_desc = ttk.Frame(nb, padding=16)
+        tab_hint = ttk.Frame(nb, padding=16)
 
         nb.add(tab_rules, text="Regeln")
         nb.add(tab_desc, text="Spielbeschreibung")
         nb.add(tab_hint, text="Hinweise")
 
-        # Beispieltexte: bewusst generisch (bitte anpassen)
-        ttk.Label(tab_rules, text="Regeln (Beispieltext)", font=("Segoe UI", 12, "bold")).pack(anchor="w", pady=(0, 6))
+        ttk.Label(tab_rules, text="Regeln", font=("Segoe UI", 13, "bold"), foreground="#1d4ed8").pack(anchor="w", pady=(0, 8))
         ttk.Label(
             tab_rules,
             text=(
-                "• Wähle eine Kategorie.\n"
-                "• Beantworte die Fragen innerhalb des Zeitlimits.\n"
-                "• Bei richtiger Antwort ist die Kategorie bestanden.\n"
-                "• Bei falscher Antwort geht es zur nächsten Frage.\n"
-                "• Sind alle Fragen falsch, ist die Kategorie fehlgeschlagen."
+                "• Wähle eine Kategorie im Hauptmenü aus.\n"
+                "• Jede Kategorie kann nur einmal gespielt werden.\n"
+                "• Beantworte die Fragen in der gewählten Kategorie.\n"
+                "• Für jede Frage steht ein Zeitlimit zur Verfügung.\n"
+                "• Eine richtige Antwort beendet die Kategorie erfolgreich.\n"
+                "• Eine falsche Antwort führt zur nächsten Frage.\n"
+                "• Wenn alle Fragen falsch beantwortet werden, gilt die Kategorie als nicht bestanden."
             ),
-            justify="left"
+            justify="left",
+            foreground="#334155",
+            wraplength=560
         ).pack(anchor="w")
 
-        ttk.Label(tab_desc, text="Spielbeschreibung (Beispieltext)", font=("Segoe UI", 12, "bold")).pack(anchor="w", pady=(0, 6))
+        ttk.Label(tab_desc, text="Spielbeschreibung", font=("Segoe UI", 13, "bold"), foreground="#1d4ed8").pack(anchor="w", pady=(0, 8))
         ttk.Label(
             tab_desc,
             text=(
-                "Dieses Quiz basiert auf deinem bestehenden CLI-Projekt.\n"
-                "Die GUI ist eine zusätzliche Schicht darüber und bedient die gleiche Logik."
+                "Dieses Quiz ist ein Wissensspiel mit verschiedenen Themenbereichen wie Programmierung, Wirtschaft und Allgemeinwissen.\n\n"
+                "Du testest dein Wissen, indem du Fragen beantwortest und Entscheidungen unter Zeitdruck triffst. Ziel ist es, möglichst viele Kategorien erfolgreich abzuschließen und ein gutes Ergebnis zu erreichen."
             ),
-            justify="left"
+            justify="left",
+            foreground="#334155",
+            wraplength=560
         ).pack(anchor="w")
 
-        ttk.Label(tab_hint, text="Anforderungen / Hinweise", font=("Segoe UI", 12, "bold")).pack(anchor="w", pady=(0, 6))
+        ttk.Label(tab_hint, text="Hinweise", font=("Segoe UI", 13, "bold"), foreground="#1d4ed8").pack(anchor="w", pady=(0, 8))
         ttk.Label(
             tab_hint,
             text=(
-                "• Logik und GUI sind getrennt (logic.py / gui.py).\n"
-                "• Fehlermeldungen werden als Dialog angezeigt.\n"
-                f"• Standard-Zeitlimit pro Frage: {self.time_limit_seconds} Sekunden (anpassbar in gui.py)."
+                "• Lies jede Frage aufmerksam.\n"
+                "• Achte auf das Zeitlimit und entscheide rechtzeitig.\n"
+                "• Nutze dein Wissen und schließe falsche Antworten aus.\n"
+                "• Jede Kategorie kann nur einmal gespielt werden."
             ),
-            justify="left"
+            justify="left",
+            foreground="#334155",
+            wraplength=560
         ).pack(anchor="w")
 
-        ttk.Button(win, text="Schließen", command=win.destroy).pack(pady=(0, 10))
+        footer = ttk.Frame(win)
+        footer.pack(fill="x", padx=16, pady=(0, 16))
+        ttk.Button(footer, text="Schließen", command=win.destroy, style="Neutral.TButton").pack(anchor="e")
 
     def _menu_new_quiz(self):
         if messagebox.askyesno("Bestätigung", "Neues Quiz starten? (Alles wird zurückgesetzt)"):
@@ -238,31 +345,28 @@ class QuizGUI:
     # QUIZ FRAME
     # ----------------------------
     def _build_quiz_frame(self):
-        top = ttk.Frame(self.quiz_frame)
+        top = ttk.Frame(self.quiz_frame, style="Card.TFrame", padding=12)
         top.pack(fill="x")
 
-        ttk.Button(top, text="← Hauptmenü", command=self.show_start).pack(side="left")
-        self.lbl_category = ttk.Label(top, text="", font=("Segoe UI", 14, "bold"))
+        ttk.Button(top, text="← Hauptmenü", command=self.show_start, style="Neutral.TButton").pack(side="left")
+        self.lbl_category = ttk.Label(top, text="", font=("Segoe UI", 14, "bold"), foreground="#1d4ed8")
         self.lbl_category.pack(side="left", padx=12)
 
-        self.lbl_progress = ttk.Label(top, text="", font=("Segoe UI", 11))
+        self.lbl_progress = ttk.Label(top, text="", font=("Segoe UI", 11), foreground="#475569")
         self.lbl_progress.pack(side="left")
 
-        self.lbl_timer = ttk.Label(top, text="", font=("Segoe UI", 11, "bold"))
+        self.lbl_timer = ttk.Label(top, text="", font=("Segoe UI", 16, "bold"), foreground="#1d4ed8")
         self.lbl_timer.pack(side="right")
 
         # Content area
         content = ttk.Frame(self.quiz_frame, padding=(0, 12))
         content.pack(fill="both", expand=True)
 
-        self.img_label = ttk.Label(content)
-        self.img_label.pack(anchor="center", pady=(0, 8))
-
-        self.lbl_question = ttk.Label(content, text="", wraplength=860, justify="left", font=("Segoe UI", 13))
+        self.lbl_question = ttk.Label(content, text="", wraplength=860, justify="left", font=("Segoe UI", 13), foreground="#0f172a")
         self.lbl_question.pack(anchor="w", pady=(0, 12))
 
-        self.answer_area = ttk.Frame(content)
-        self.answer_area.pack(fill="x")
+        self.answer_area = ttk.Frame(content, style="Card.TFrame")
+        self.answer_area.pack(fill="x", padx=2, pady=4)
 
         # For free text
         self.entry_answer = ttk.Entry(content)
@@ -272,10 +376,10 @@ class QuizGUI:
         bottom = ttk.Frame(self.quiz_frame)
         bottom.pack(fill="x", pady=(8, 0))
 
-        self.btn_submit = ttk.Button(bottom, text="Antwort prüfen", command=self._submit_current)
+        self.btn_submit = ttk.Button(bottom, text="Antwort prüfen", command=self._submit_current, style="Accent.TButton")
         self.btn_submit.pack(side="right")
 
-        self.btn_next = ttk.Button(bottom, text="Next →", command=self._next_after_feedback)
+        self.btn_next = ttk.Button(bottom, text="Weiter →", command=self._next_after_feedback, style="Accent.TButton")
         self.btn_next.pack(side="right", padx=(0, 8))
         self.btn_next.state(["disabled"])
 
@@ -291,8 +395,6 @@ class QuizGUI:
         self.btn_next.state(["disabled"])
         self.feedback.config(text="")
         self.choice_var.set(0)
-        self.current_image = None
-        self.img_label.config(image="")
 
         kat = self.engine.selected_category
         q = self.engine.current_question()
@@ -306,9 +408,6 @@ class QuizGUI:
 
         # Question text
         self.lbl_question.config(text=q.text)
-
-        # Image (optional)
-        self._try_render_image(getattr(q, "image_path", None))
 
         # Clear answer area
         for w in self.answer_area.winfo_children():
@@ -339,20 +438,6 @@ class QuizGUI:
         # start timer
         self._start_timer(self.time_limit_seconds)
 
-    def _try_render_image(self, image_path):
-        if not image_path:
-            return
-        if Image is None or ImageTk is None:
-            self.feedback.config(text="Hinweis: Pillow nicht verfügbar – Bild kann nicht angezeigt werden.")
-            return
-        try:
-            img = Image.open(image_path)
-            img.thumbnail((760, 240))
-            self.current_image = ImageTk.PhotoImage(img)
-            self.img_label.config(image=self.current_image)
-        except Exception:
-            self.feedback.config(text="Hinweis: Bild konnte nicht geladen werden (Pfad/Format prüfen).")
-
     # ----------------------------
     # Timer
     # ----------------------------
@@ -380,7 +465,7 @@ class QuizGUI:
         self._cancel_timer()
         # Timeout zählt als falscher Versuch, automatisch nächste Frage / Ende
         res = self.engine.submit_answer(None, timed_out=True)
-        messagebox.showinfo("Time is up", "Time is up! Nächste Frage…")
+        messagebox.showinfo("Zeit abgelaufen", "Zeit abgelaufen! Nächste Frage…")
         if res.finished_category:
             self.show_results()
         else:
@@ -405,11 +490,6 @@ class QuizGUI:
             res = self.engine.submit_answer(ans, timed_out=False)
             self._mark_text_feedback(res)
 
-        if res.correct:
-            self.feedback.config(text="Richtig!", foreground="#0a0")
-        else:
-            self.feedback.config(text=res.message, foreground="#a00")
-
         # Next enabled after checking
         self.btn_next.state(["!disabled"])
 
@@ -417,7 +497,7 @@ class QuizGUI:
         if res.finished_category:
             self.btn_next.config(text="Ergebnis →")
         else:
-            self.btn_next.config(text="Next →")
+            self.btn_next.config(text="Weiter →")
 
     def _mark_mc_feedback(self, res, q: Frage):
         # reset colors
@@ -433,9 +513,6 @@ class QuizGUI:
         chosen = self.choice_var.get()
         if chosen and chosen != correct and 1 <= chosen <= len(self.choice_buttons):
             self.choice_buttons[chosen - 1].config(bg="#f7c5c5")
-
-        if not res.correct and res.message and chosen == 0:
-            messagebox.showerror("Fehler", res.message)
 
     def _mark_text_feedback(self, res):
         if not res.correct and res.message.startswith("Ungültige"):
@@ -456,20 +533,64 @@ class QuizGUI:
     # RESULT FRAME
     # ----------------------------
     def _build_result_frame(self):
-        header = ttk.Label(self.result_frame, text="Ergebnis", font=("Segoe UI", 18, "bold"))
+        header = ttk.Label(self.result_frame, text="Ergebnis", font=("Segoe UI", 20, "bold"), foreground="#1d4ed8")
         header.pack(anchor="w", pady=(0, 10))
 
-        self.result_text = tk.Text(self.result_frame, height=16, wrap="word")
-        self.result_text.pack(fill="both", expand=True)
+        summary_frame = ttk.Frame(self.result_frame, style="Card.TFrame", padding=12)
+        summary_frame.pack(fill="x", pady=(0, 10))
+
+        self.summary_label = ttk.Label(
+            summary_frame,
+            text="",
+            justify="left",
+            font=("Segoe UI", 11),
+            anchor="w",
+            foreground="#334155",
+        )
+        self.summary_label.pack(anchor="w")
+
+        table_frame = ttk.Frame(self.result_frame)
+        table_frame.pack(fill="both", expand=True)
+
+        self.result_tree = ttk.Treeview(
+            table_frame,
+            columns=("category", "score", "attempts", "failed", "status", "percent"),
+            show="headings",
+            height=8,
+            selectmode="browse",
+        )
+        self.result_tree.pack(side="left", fill="both", expand=True)
+
+        self.result_tree.heading("category", text="Kategorie")
+        self.result_tree.heading("score", text="Punkte")
+        self.result_tree.heading("attempts", text="Versuche")
+        self.result_tree.heading("failed", text="Falsch")
+        self.result_tree.heading("status", text="Status")
+        self.result_tree.heading("percent", text="Prozent")
+
+        self.result_tree.column("category", width=230, minwidth=180, anchor="w")
+        self.result_tree.column("score", width=90, minwidth=80, anchor="center")
+        self.result_tree.column("attempts", width=90, minwidth=80, anchor="center")
+        self.result_tree.column("failed", width=90, minwidth=80, anchor="center")
+        self.result_tree.column("status", width=120, minwidth=110, anchor="center")
+        self.result_tree.column("percent", width=90, minwidth=80, anchor="center")
+
+        self.result_tree.tag_configure("even", background="#f8fafc")
+        self.result_tree.tag_configure("odd", background="#ffffff")
+
+        y_scroll = ttk.Scrollbar(table_frame, orient="vertical", command=self.result_tree.yview)
+        y_scroll.pack(side="right", fill="y")
+        self.result_tree.configure(yscrollcommand=y_scroll.set)
 
         bottom = ttk.Frame(self.result_frame)
         bottom.pack(fill="x", pady=(10, 0))
 
-        ttk.Button(bottom, text="Neustart", command=self._menu_new_quiz).pack(side="left")
-        ttk.Button(bottom, text="Hauptmenü", command=self.show_start).pack(side="left", padx=8)
-        ttk.Button(bottom, text="Beenden", command=self._menu_quit).pack(side="left")
+        ttk.Button(bottom, text="Neustart", command=self._menu_new_quiz, style="Neutral.TButton").pack(side="left")
+        ttk.Button(bottom, text="Hauptmenü", command=self.show_start, style="Neutral.TButton").pack(side="left", padx=8)
+        ttk.Button(bottom, text="Beenden", command=self._menu_quit, style="Danger.TButton").pack(side="left")
 
-        ttk.Button(bottom, text="Show Results", command=self.show_results).pack(side="right")
+        ttk.Button(bottom, text="Ergebnisse anzeigen", command=self.show_results, style="Accent.TButton").pack(side="right")
+
 
     def _render_results(self):
         s = self.engine.summary()
@@ -479,17 +600,32 @@ class QuizGUI:
         total_failed = s["failed_total"]
         percent = s["percent_total"]
 
-        self.result_text.delete("1.0", "end")
-        self.result_text.insert("end", f"Gesamtpunktzahl: {total_correct}\n")
-        self.result_text.insert("end", f"Anzahl richtiger Antworten: {total_correct}\n")
-        self.result_text.insert("end", f"Anzahl falscher Antworten: {total_failed}\n")
-        self.result_text.insert("end", f"Gesamtversuche: {total_attempts}\n")
-        self.result_text.insert("end", f"Prozentuale Auswertung: {percent}%\n\n")
-
-        self.result_text.insert("end", "— Auswertung nach Kategorie —\n")
-        for c in s["by_category"]:
-            self.result_text.insert(
-                "end",
-                f"{c['name']}: Score={c['score']}, Versuche={c['attempts']}, Falsch={c['failed_attempts']}, "
-                f"Status={c['status']}, Quote={c['percent']}%\n"
+        self.summary_label.config(
+            text=(
+                f"Gesamtpunktzahl: {total_correct} · Richtige Antworten: {total_correct} · "
+                f"Falsche Antworten: {total_failed} · Gesamtversuche: {total_attempts} · "
+                f"Auswertung: {percent}%"
             )
+        )
+
+        for row in self.result_tree.get_children():
+            self.result_tree.delete(row)
+
+        by_category = s["by_category"]
+        self.result_tree.configure(height=min(len(by_category), 8))
+
+        for idx, c in enumerate(by_category):
+            self.result_tree.insert(
+                "",
+                "end",
+                values=(
+                    c["name"],
+                    c["score"],
+                    c["attempts"],
+                    c["failed_attempts"],
+                    c["status"],
+                    f"{c['percent']}%",
+                ),
+                tags=("even" if idx % 2 == 0 else "odd",),
+            )
+
