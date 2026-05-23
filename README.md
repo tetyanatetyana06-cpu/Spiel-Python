@@ -1,17 +1,11 @@
-"Bist du gut vorbereitet?" - das Klausurvorbereitungsquiz
+# "Bist du gut vorbereitet?" - das Klausurvorbereitungsquiz
 
 
-Inhaltsverzeichnis:
-1. Projektbeschreibung
-2. Voraussetzung und Installation <br>
-  2.1 Voraussetzungen für das Durchlaufen des Quiz <br>
-  2.2 Installationsanleitung Python 3.13.2 <br>
-  2.3 Installationsanleitung Visual Studio Code <br>
-  2.4 Installationsanleitung des Quiz am Beisiel von Visual Studio Code<br>
-3. Klassendiagramm
-4. Ausführen des Quiz
-5. Testen des Programms mit Pytest
-6. Mitwirkende am Quiz
+## Inhaltsverzeichnis
+- [Projektbeschreibung- #installation
+- [Klassendiagramm](#klassendiagramm)
+- [Ausführen](#ausführen-des-quiz)
+- [Tests](#
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
    
