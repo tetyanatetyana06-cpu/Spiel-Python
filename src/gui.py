@@ -64,6 +64,9 @@ class QuizGUI:
         style.configure("TLabel", background="#f4f7fb", foreground="#0f172a")
         style.configure("TButton", font=("Segoe UI", 11), padding=(16, 10))
         style.configure("TFrame", background="#f4f7fb")
+        style.configure("TEntry", fieldbackground="#ffffff", background="#ffffff", borderwidth=1)
+        style.configure("Correct.TEntry", fieldbackground="#dcfce7", background="#dcfce7", borderwidth=1)
+        style.configure("Incorrect.TEntry", fieldbackground="#fee2e2", background="#fee2e2", borderwidth=1)
 
         style.configure("Treeview", background="#ffffff", fieldbackground="#ffffff", rowheight=30, font=("Segoe UI", 10))
         style.configure("Treeview.Heading", font=("Segoe UI", 10, "bold"), background="#eef2ff", relief="flat")
@@ -390,11 +393,20 @@ class QuizGUI:
         self.choice_var = tk.IntVar(value=0)
         self.choice_buttons = []
 
+    def _reset_text_input_style(self):
+        if hasattr(self, "entry_answer"):
+            self.entry_answer.configure(style="TEntry")
+
+    def _set_text_input_result(self, correct: bool):
+        if hasattr(self, "entry_answer"):
+            self.entry_answer.configure(style="Correct.TEntry" if correct else "Incorrect.TEntry")
+
     def _render_question(self):
         self._cancel_timer()
         self.btn_next.state(["disabled"])
         self.feedback.config(text="")
         self.choice_var.set(0)
+        self._reset_text_input_style()
 
         kat = self.engine.selected_category
         q = self.engine.current_question()
@@ -515,8 +527,18 @@ class QuizGUI:
             self.choice_buttons[chosen - 1].config(bg="#f7c5c5")
 
     def _mark_text_feedback(self, res):
-        if not res.correct and res.message.startswith("Ungültige"):
+        if res.correct:
+            self._set_text_input_result(True)
+            self.feedback.config(text="Richtige Antwort!", foreground="#166534")
+            return
+
+        self._set_text_input_result(False)
+        if res.message.startswith("Ungültige"):
+            self.feedback.config(text=res.message, foreground="#991b1b")
             messagebox.showerror("Fehler", res.message)
+            return
+
+        self.feedback.config(text=res.message, foreground="#991b1b")
 
     def _next_after_feedback(self):
         # If category finished -> results

@@ -31,7 +31,7 @@ def build_categories() -> List[Category]:
 
     mitarbeiter = 20000
     produktion = 40000
-    produktivität = round(produktion / mitarbeiter, 2)
+    produktivität = f"{round(produktion / mitarbeiter, 2):.2f}"
 
     fragen_bwl = [
         Frage("Was verlangt das ökonomische Prinzip?",
@@ -47,7 +47,8 @@ def build_categories() -> List[Category]:
         FrageOhneIndex(
             f"Eine große Möbelfirma hat {mitarbeiter} Mitarbeiter, die {produktion} Tische pro Jahr produzieren. "
             f"Wie hoch ist die Arbeitsproduktivität pro Mitarbeiter gerundet auf zwei Nachkommastellen?",
-            str(produktivität)
+            produktivität,
+            accepted_answers=["2", "2,00", "2 Tische", "2,00 Tische"],
         ),
     ]
 
