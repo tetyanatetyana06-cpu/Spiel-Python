@@ -2,10 +2,12 @@
 
 
 ## Inhaltsverzeichnis
-- [Projektbeschreibung- #installation
+- [Projektbeschreibung](#projektbeschreibung)
+- [Voraussetzungen und Installation](#voraussetzungen-und-installation)
 - [Klassendiagramm](#klassendiagramm)
 - [Ausführen](#ausführen-des-quiz)
-- [Tests](#
+- [Testen des Programms mit Pytest](#testen-des-programms-mit-pytest)
+- [Mitwirkende am Quiz](#mitwirkende-am-quiz)
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
    
