@@ -1,5 +1,5 @@
 import pytest
-from src.frage_ohne_index_cli import FrageOhneIndex
+from src.frage_ohne_index import FrageOhneIndex
 
 
 def test_richtige_antwort(monkeypatch):
