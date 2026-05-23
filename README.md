@@ -11,7 +11,7 @@
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
    
-1. Projektbeschreibung: <br>
+## 1. Projektbeschreibung: <br>
 Ein Quiz, was unseren Kommilitonen helfen soll, ihr Wissen zu zwei unserer Prüfungsfächer aufzufrischen. 
 Das Quiz beinhaltet Multipe-Choice-Fragen sowie Rechenaufgaben und eine kleine Spaß-Kategorie mit Fragen, die nichts mit Uni-Inhalten zu tun haben.
 Das Quiz besteht aus vier Kategorien, die in beliebiger Reihenfolge abgearbeitet werden können. Jede Kategorie enthält
@@ -23,52 +23,35 @@ Unser Projekt wurde mithilfe von GitHub, Visual Studio Code und Pycharm erstellt
 haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet. 
   
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
-2. Voraussetzungen und Installation <br>
-  2.1 Voraussetzungen für das Durchlaufen des Quiz: <br>
-  -Python Version 3.13.2 muss auf dem Rechner installiert sein. <br>
-  -Visual Studion Code, bzw eine andere Code-Editor Software, muss auf dem Rechner installiert sein. <br>
-  -Es muss ein GitHub-Account vorhanden sein, der mit dem Code-Editor-Programm verbunden ist. <br>
+## 2. Voraussetzungen und Installation <br>
+  ### 2.1 Voraussetzungen für das Durchlaufen des Quiz: <br>
+  -Python Version 3.13.2  <br>
+  -Visual Studion Code (optional, andere IDE möglich) <br>
+  -GitHub-Account <br>
+
+   ### 2.2 Installationsanleitung Python 3.13.2: <br>
+  Über die offizielle Python Website kann man diese Python installieren und sich einer detaillierten Installationsanleitung unter „downloads“ bedienen.
+  [Python Download](https://www.python.org/downloads/)
 
 
-   2.2 Installationsanleitung Python 3.13.2: <br>
-   Windows <br>
-   Man geht auf die offzielle Python Website (Python.org) und navigiert zu python.org/downloads.
-   Daraufhin wählt man Python 3.13.2 aus und lädt den Installer für Windows herunter. Nun kann man die .exe Datei ausführen,
-   wobei es wichtig ist, die Option "Add Python to PATH" auszuwählen. Danach klickt man auf Install Now.
-   Jetzt öffnet man das Rechnerterminal und prüft mit "python --version", ob die Installation erfolgreich war.
-
-   macOS <br>
-   Für macOS empfiehlt es sich, Homebrew zu verwenden. Dort tippt man "brew install python@3.13" ein, und passt es an mit:
-   "echo 'export PATH="/usr/local/opt/python@3.13/bin:$PATH"' >> ~/.zshrc
-    source ~/.zshrc"
-   Alternativ kann man auch das macOS-Paket von Python herunterladen und installieren.
-
-
-   2.3 Installationsanleitung Visual Studio Code: <br>
-   Windows <br>
-    Man begibt sich zu https://code.visualstudio.com/ und lädt den Installer für Windows herunter.
-    Daraufhin führt man die heruntrgeladene .exe Datei aus und wählt die Option "Add to PATH" und "Create Desktop Icon" aus.
-    Anschließend klickt man auf "Install". Nun kann man VS Code über das Startmenü öffnen.
-
-   macOS <br>
-    Man begibt sich zu https://code.visualstudio.com/ und lädt die .zip Datei für macOS herunter.
-    Jetzt entpackt man die Datei und verschiebt sie in den Ordner "Programme". Nun kann man VS Code aus dem Programme- Ordner oder
-    über das Spotlight öffnen.
+  ### 2.3 Installationsanleitung Visual Studio Code: <br>
+   Über die offizielle VS Code Website kann man diese IDE installieren und sich einer detaillierten Installationsanleitung unter „DOCS“ bedienen. 
+   [VS Code Download](https://code.visualstudio.com/docs/)
 
  
+  ### 2.4 Installationsanleitung des Quiz am Beispiel von Visual Studio Code: <br>
+   Um das Repository lokal zu klonen, klickt man auf den grünen Code Button in der "Code"-Abteilung von GitHub. Dort kopiert man die URL des Repositories und        öffnet die Visual Studio Code App. Man wählt ganz links das Source-Control-Symbol in der Leiste aus und klickt auf das blaue Feld "Clone Repository". Jetzt
+   kann man in die Suchleiste oben in der Mitte der Benutzeroberfläche die URL einfügen und die Projektstruktur sollte links im Explorer auftauchen.
 
-   2.4 Installationsanleitung des Quiz am Beispiel von Visual Studio Code: <br>
-    Man öffnet Visual Studio Code und klickt auf das Account-icon in der Status-Leiste. Dort kann man "Sign in to GitHub"
-    auswählen. Ist dies nicht vorhanden, kann man auf die Suchleiste in Visual Studio Code klicken und dort "GitHub" eingeben.
-    Als eines der Ergebnisse sollte ein blaues Feld mit "Sign in to sync settings" auftauchen, das man auswählt. Man
-    wird zu der Online-Seite weitergeleitet, wo man Visual Studio Code authorisieren muss. Es sollte eine Box mit dem 
-    eigenen GitHub-Account auftauchen, in der man auf das grüne Feld "Continue" klickt. Danach erscheint das Visual Studio Code-Symbol und man wird zu der Visual Studio Code Desktop App weitergeleitet.
-    Dort kann man per Klick auf das Account-Icon überprüfen können, ob man eingeloggt ist. <br>
-   Repository Clonen:
-    Man klickt auf den grünen Code Button in der "Code"-Abteilung von GitHub. Dort kopiert man die URL des Repositorys
-    und öffnet die Visual Studio Code App. Man wählt ganz links das Source-Control-Symbol in der Leiste aus und klickt auf das blaue
-    Feld "Clone Repository". Jetzt kann man in die Suchleiste oben in der Mitte der Benutzeroberfläche die URL einfügen und 
-    die Projektstruktur sollte links im Explorer auftauchen.
+   ### 2.5 Bedienung des feature/gui - branch
+   Um sicherzustellen, dass Sie die GUI-Version des Quiz öffnen, können Sie folgende Commands nacheinander in Ihrem Terminal der IDE Ihrer Wahl eingeben, nachdem
+   Sie das Repository bereits geklont haben: 
+   ```bash
+         <git checkout feature/gui>
+	      <git pull>
+   ```
+
+
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 3. Klassendiagramm
