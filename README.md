@@ -12,8 +12,8 @@
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
    
 ## 1. Projektbeschreibung: <br>
-Ein Quiz, das unseren Kommilitonen helfen soll ihr Modulwissen in wenigen Fragen aufzufrischen. Das Quiz beinhaltet Multiple-Choice-Fragen sowie Rechenaufgaben und eine kleine Spaß-Kategorie mit Fragen, die nichts mit Uni-Inhalten zu tun haben. Das Quiz besteht aus vier Kategorien, die in beliebiger Reihenfolge abgearbeitet werden können. Jede Kategorie enthält maximal drei Fragen. Beantwortet der Nutzer die erste Frage richtig, besteht er die Kategorie. Hat der Benutzer eine Frage falsch beantwortet, hat er noch zwei weitere Versuche mit zwei anderen Fragen, bevor er in der Kategorie durchfällt. Der Punktestand kann während der Bearbeitung des Quiz eingesehen werden, oder nach Bearbeitung der vier Kategorien in Form einer Auswertung. Man kann das Quiz auch während des Versuchs neustarten, wobei alle bisherigen Eingaben des Durchlaufs gelöscht werden.
-Hierbei handelt es sich um die Version des Quiz, die um ein Graphical User Interface erweitert wurde.
+Ein Quiz, das unseren Kommilitonen helfen soll ihr Modulwissen in wenigen Fragen aufzufrischen. Das Quiz beinhaltet Multiple-Choice-Fragen sowie Rechenaufgaben und eine kleine Spaß-Kategorie mit Fragen, die nichts mit Uni-Inhalten zu tun haben. <br> Das Quiz besteht aus vier Kategorien, die in beliebiger Reihenfolge abgearbeitet werden können. Jede Kategorie enthält maximal drei Fragen. Beantwortet der Nutzer die erste Frage richtig, besteht er die Kategorie. Hat der Benutzer eine Frage falsch beantwortet, hat er noch zwei weitere Versuche mit zwei anderen Fragen, bevor er in der Kategorie durchfällt. Der Punktestand kann während der Bearbeitung des Quiz eingesehen werden, oder nach Bearbeitung der vier Kategorien in Form einer Auswertung. Man kann das Quiz auch während des Versuchs neustarten, wobei alle bisherigen Eingaben des Durchlaufs gelöscht werden. <br>
+Hierbei handelt es sich um die Version des Quiz, die um ein Graphical User Interface erweitert wurde. <br>
 Unser Projekt wurde mithilfe von GitHub, Visual Studio Code und Pycharm erstellt. Zur Unterstützung unserer Arbeit haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet.
  
   
@@ -191,7 +191,7 @@ build_categories --> Category
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-4. Ausführen des Quiz: <br>
+## 4. Ausführen des Quiz: <br>
    Die Datei main.py muss ausgewählt werden. Anschließend wird der Code durch Klicken auf den „Run“-Button in Ihrer IDE ausgeführt. Das GUI sollte nach wenigen
    Augenblicken erscheinen. Zunächst wird das Hauptmenü angezeigt:
    ![Hauptmenü](images/Hauptmenü1.png)
@@ -230,7 +230,7 @@ build_categories --> Category
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
-5.Testen des Programms mit Pytest:
+## 5.Testen des Programms mit Pytest:
 Falls Sie das Quiz auf Fehler im Code testen möchten, können Sie dies mit Pytest tun.
 Wählen Sie eine der Testdateien links in der Explorer-leiste innerhalb des „tests“-Ordners aus. 
 Daraufhin gibt man folgenden befehl in Ihrem Terminal ein:
@@ -243,7 +243,7 @@ pytest -v
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-6. Mitwirkende am Quiz: <br>
+## 6. Mitwirkende am Quiz: 
 
 Lead Developer: Sarah Friedmann <br>
 Testverantwortliche: Tetiana Martyniuk <br>
