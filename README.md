@@ -47,142 +47,180 @@ haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet.
    Um sicherzustellen, dass Sie die GUI-Version des Quiz öffnen, können Sie folgende Commands nacheinander in Ihrem Terminal der IDE Ihrer Wahl eingeben, nachdem
    Sie das Repository bereits geklont haben: 
    ```bash
-         <git checkout feature/gui>
-	      <git pull>
+         git checkout feature/gui
+	      git pull
    ```
 
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
-3. Klassendiagramm
+## 3. Klassendiagramm als UML-Skizze
+```bash
+@startuml
+&#39; =========================================================
+&#39; CATEGORY
+&#39; =========================================================
+class Category {
+- name: str
+- fragen: List
+- score: int
+- attempts: int
+- failed_attempts: int
+- status: str
 
-classDiagram
++ play_category()
+}
 
-class UngueltigeAuswahlError { <br>
-    << Exception >> <br>
-} <br>
+&#39; =========================================================
+&#39; FRAGE (MULTIPLE CHOICE)
+&#39; =========================================================
+class Frage {
+- text: str
+- antworten: List[str]
+- richtige_antwort: int
+- image_path: Optional[str]
++ anzeigen()
++ pruefe_antwort()
++ is_correct()
++ correct_choice_1_based():
++ correct_answer_text()
+}
+&#39; =========================================================
+&#39; FRAGE OHNE INDEX (OFFENE FRAGE)
+&#39; =========================================================
+class FrageOhneIndex {
+- text: str
+- richtige_antwort: str
+- image_path: Optional[str]
 
-class Frage { <br>
-    - text: str <br>
-    - antworten: List[str] <br>
-    - richtige_antwort: int <br>
-    + init(text, antworten, richtige_antwort) <br>
-    + anzeigen() <br>
-    + pruefe_antwort(auswahl: int) bool <br>
-} <br>
++ stellen()
++ is_correct()
+}
+&#39; =========================================================
+&#39; QUIZ ENGINE (LOGIK)
+&#39; =========================================================
+class QuizEngine {
+- categories: List[Category]
 
-class FrageOhneIndex { <br>
-    - text: str <br>
-    - richtige_antwort: str <br>
-    + init(text, richtige_antwort) <br>
-    + stellen() bool <br>
-} <br>
+- gesamt_versuche: int
+- selected_category: Category
+- current_index: int
+- versuche_in_runde: int
 
-class Category { <br>
-    - name: str <br>
-    - fragen: List[Frage | FrageOhneIndex] <br>
-    - score: int <br>
-    - attempts: int <br>
-    - failed_attempts: int <br>
-    - status: str <br>
-    + init(name, fragen) <br>
-    + play_category() int <br>
-} <br>
++ reset_all()
++ category_list()
++ select_category_by_index()
++ current_question()
++ question_progress():
++ submit_answer()
++ summary()
+- _handle_correct()
+- _handle_incorrect()
+}
+&#39; =========================================================
+&#39; SUBMIT RESULT (DATA CLASS)
+&#39; =========================================================
+class SubmitResult {
++ correct: bool
++ message: str
++ correct_choice_1_based: Optional[int]
++ correct_text: Optional[str]
++ finished_category: bool
++ category_status: Optional[str]
+}
+&#39; =========================================================
+&#39; GUI (TKINTER)
+&#39; =========================================================
+class QuizGUI {
+- root: Tk
+- engine: QuizEngine
+- time_limit_seconds: int
+- main: Frame
+- start_frame: Frame
+- quiz_frame: Frame
+- result_frame: Frame
+- bg_canvas: Canvas
+- category_bg_canvas: Canvas
+- timer_after_id: int
+- remaining: int
++_apply_theme()
++ _on_root_configure()
 
-class main { <br>
-    - erzeugt Kategorien: Category <br>
-    - ruft play_category() auf <br>
-    - verwaltet Gesamtpunkte <br>
-    - Eingabe-/Auswahl- <br>
-} <br>
++_draw_background_pattern()
++_hide_all()
++ show_start(): void
++ show_quiz(): void
++ show_results(): void
++ _build_start_frame(): void
++ _build_quiz_frame(): void
++ _build_result_frame(): void
++ _refresh_start_categories(): void
++ _render_question(): void
++ _render_results(): void
 
-UngueltigeAuswahlError <|-- Frage <br> 
-UngueltigeAuswahlError <|-- FrageOhneIndex <br>
++_on_category_bg_configure()
++ _draw_category_pattern()
 
-Frage --> main <br>
-FrageOhneIndex --> Category <br>
-Category --> main <br>
++ _submit_current(): void
++ _next_after_feedback(): void
++ _start_timer(seconds: int): void
++ _tick(): void
++ _cancel_timer(): void
++ _on_time_up(): void
++ _mark_mc_feedback(res, q): void
++ _mark_text_feedback(res): void
++ _menu_restart_quiz(): void
++ _menu_new_quiz(): void
++ _menu_quit(): void
++ _open_infos(): void
++ _start_category(idx: int): void
+}
+
+}
+&#39; =========================================================
+&#39; RELATIONSHIPS
+&#39; =========================================================
+Category &quot;1&quot; --&gt; &quot;*&quot; Frage
+Category &quot;1&quot; --&gt; &quot;*&quot; FrageOhneIndex
+QuizEngine --&gt; Category
+
+QuizEngine --&gt; SubmitResult
+QuizEngine --&gt; QuestionType
+QuizGUI --&gt; QuizEngine
+QuizGUI --&gt; SubmitResult
+build_categories --&gt; Category
+@enduml
+
+```
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 4. Ausführen des Quiz: <br>
-   
-Man wählt links im Explorer die main.py-Datei aus. Diese ist die Datei, in der das eigentliche Quiz ausgeführt wird.
-Dauraufhin klickt man auf das "Run Python File"-Symbol (ein nach links zeigendes Dreieck), das sich rechts in der Tab-Leiste
-im oberen Bereich des Bildschirms befindet. Nun sollte unten im Terminal Folgendes erscheinen:
+   Die Datei main.py muss ausgewählt werden. Anschließend wird der Code durch Klicken auf den „Run“-Button in Ihrer IDE ausgeführt. Das GUI sollte nach wenigen
+   Augenblicken erscheinen. Zunächst wird das Hauptmenü angezeigt:
 
-=== Kategorien-Menü ===
-Aktueller Punktestand: 0 | Gesamtversuche: 0
-1. Überraschung (Score: 0, Versuche: 0, Status: pending)
-2. Programmierung (Score: 0, Versuche: 0, Status: pending)
-3. BWL (Score: 0, Versuche: 0, Status: pending)
-4. Marketing (Score: 0, Versuche: 0, Status: pending)
-5. Beenden
-6. Neustart
-Bitte wählen:
+   Möchte man das Quiz während der Bearbeitung neu starten oder beenden, kann dies über den „Menu“-Button oben links im Interface erfolgen.
+   Weitere Informationen zu den Quizregeln, eine Spielbeschreibung sowie zusätzliche Hinweise können über den „Info“-Button neben dem „Menu“-Button aufgerufen
+   werden.
 
-Dies ist das Menü unseres Quiz. Mit der Eingabe einer Zahl von 1-4, direkt hinter dem "Bitte wählen" im Terminal kann man eine beliebige Kategorie auswählen.
-Beispiel: Folgendes sollte erscheinen, wenn man die Zahl "2" eingibt:
+   #### Quizbearbeitung
+   Mit „Kategorie starten“ kann eine beliebige Kategorie ausgewählt werden, da diese in beliebiger Reihenfolge bearbeitet werden können.
 
-Kategorie: Programmierung
-Was ist ein 'Dictionary' in Python?
-1. Eine sortierte Liste
-2. Eine Sammlung aus Schlüssel-Wert-Paaren
-3. Eine unveränderte Datenstruktur
-4. Ein Datentyp für Texte
-Deine Auswahl:
+   Wird eine Antwort nicht vor Ablauf des Timers eingegeben, wird nach einem Pop-up-Fenster automatisch zur nächsten Frage innerhalb der Kategorie weitergeleitet:
+   Wird diese Aufgabe ebenfalls falsch beantwortet, erhält man eine weitere Frage innerhalb der Kategorie. Um zu dieser zu gelangen, klickt man auf den Button
+   „Next“ unten rechts im Widget.
+   Jedes Mal, wenn eine Kategorie abgeschlossen wird, verändert sich der Zustand des entsprechenden Feldes, und der Punktestand wird aktualisiert. Möchte man
+   während des Quiz den aktuellen Punktestand einsehen, kann man dies über den Button „Ergebnis“ tun. Alternativ ist dieser auch im Hauptmenü verfügbar.
 
-Gibt man die richtige Antwort ein, wird die Kategorie als bestanden gezählt und man wird zu einem veränderten Menü weitergeleitet:
+   Sind alle vier Kategorien abgeschlossen, kann das Gesamtergebnis über das Hauptmenü eingesehen werden, indem man auf den Button „Ergebnisse anzeigen“ unten
+   rechts im Widget klickt.
 
-=== Kategorien-Menü ===
-Aktueller Punktestand: 1 | Gesamtversuche: 1
-1. Überraschung (Score: 0, Versuche: 0, Status: pending)
-2. Programmierung (Score: 1, Versuche: 1, Status: completed)
-3. BWL (Score: 0, Versuche: 0, Status: pending)
-4. Marketing (Score: 0, Versuche: 0, Status: pending)
-5. Beenden
-6. Neustart
-Bitte wählen:
+   #### Beispielhafte Auswertung
+   Eine beispielhafte Auswertung des Quiz könnte folgendermaßen aussehen:
 
-Gibt man die falsche Antwort ein, wird man zu einer Frage innerhalb der Kategorie weitergeleitet:
+   Unten links kann ausgewählt werden, ob man zum Hauptmenü zurückkehren, das Quiz neu starten oder beenden möchte.
 
-
-Wofür wird eine Funktion in Python verwendet?
-1. Um Daten dauerhaft zu speichern
-2. Um wiederverwendbaren Code zu erstellen
-3. Um Dateien zu öffnen
-4. Um Programme zu beenden
-Deine Auswahl:
-
-Wenn man auch diese Aufgabe falsch beantwortet, bekommt man noch eine weitere Frage innerhalb der Kategorie. Hat man auch diese falsch,
-fällt man in der Kategorie mit 0 Punkten durch und wird zurück zum leicht veränderten hauptmenü weitergeleitet, um die nächste kategorie auswählen.
-So sieht das aus:
-
-=== Kategorien-Menü ===
-Aktueller Punktestand: 0 | Gesamtversuche: 3
-1. Überraschung (Score: 0, Versuche: 0, Status: pending)
-2. Programmierung (Score: 0, Versuche: 3, Status: failed)
-3. BWL (Score: 0, Versuche: 0, Status: pending)
-4. Marketing (Score: 0, Versuche: 0, Status: pending)
-5. Beenden
-6. Neustart
-Bitte wählen:
-
-Wenn man alle Kategorien abgearbeitet hat, kann man die Zahl "5" eingeben, um das Quiz zu beenden. Um einen erneuten Druchlauf zu starten, klickt man wieder
-auf das "Run Python File"-Symbol. Man kann auch die Zahl "6" eingeben, wodurch die Daten des bisherigen Durchlaufs gelöscht werden und ein neuer Durchlauf beginnt, ohne die vorherigen Ergebnisse in die Bewertung einzubeziehen.
-
-
-Quiz beendet.
-Endergebnis: 2 Punkte bei 8 Versuchen.
-
-=== Übersicht pro Kategorie ===
-Überraschung: 1 Punkte bei 1 Versuchen (Status: completed)
-Programmierung: 0 Punkte bei 3 Versuchen (Status: failed)
-BWL: 1 Punkte bei 1 Versuchen (Status: completed)
-Marketing: 0 Punkte bei 3 Versuchen (Status: failed)
-
-Dies wäre eine beispielhafte Auswertung des Quiz.
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
