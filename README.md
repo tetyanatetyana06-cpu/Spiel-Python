@@ -42,7 +42,7 @@ Unser Projekt wurde mithilfe von GitHub, Visual Studio Code und Pycharm erstellt
    Sie das Repository bereits geklont haben: 
    ```bash
          git checkout feature/gui
-	      git pull
+	     git pull
    ```
 
 
@@ -193,27 +193,36 @@ build_categories --> Category
 4. Ausführen des Quiz: <br>
    Die Datei main.py muss ausgewählt werden. Anschließend wird der Code durch Klicken auf den „Run“-Button in Ihrer IDE ausgeführt. Das GUI sollte nach wenigen
    Augenblicken erscheinen. Zunächst wird das Hauptmenü angezeigt:
-   images/Hauptmenü1.png
+   ![Hauptmenü](images/Hauptmenü1.png)
 
 
    Möchte man das Quiz während der Bearbeitung neu starten oder beenden, kann dies über den „Menu“-Button oben links im Interface erfolgen.
    Weitere Informationen zu den Quizregeln, eine Spielbeschreibung sowie zusätzliche Hinweise können über den „Info“-Button neben dem „Menu“-Button aufgerufen
    werden.
+   ![Info](images/Info-Button.png)
 
    #### Quizbearbeitung
    Mit „Kategorie starten“ kann eine beliebige Kategorie ausgewählt werden, da diese in beliebiger Reihenfolge bearbeitet werden können.
+   ![Frage](images/Frage1.png)
+
 
    Wird eine Antwort nicht vor Ablauf des Timers eingegeben, wird nach einem Pop-up-Fenster automatisch zur nächsten Frage innerhalb der Kategorie weitergeleitet:
+   ![Timer](images/Zeit-Abgelaufen.png)
    Wird diese Aufgabe ebenfalls falsch beantwortet, erhält man eine weitere Frage innerhalb der Kategorie. Um zu dieser zu gelangen, klickt man auf den Button
    „Next“ unten rechts im Widget.
+   ![Weiter](Weiter.png)
    Jedes Mal, wenn eine Kategorie abgeschlossen wird, verändert sich der Zustand des entsprechenden Feldes, und der Punktestand wird aktualisiert. Möchte man
    während des Quiz den aktuellen Punktestand einsehen, kann man dies über den Button „Ergebnis“ tun. Alternativ ist dieser auch im Hauptmenü verfügbar.
+   ![Ergebnisbutton](images/Ergebnisbutton.png)
+   ![Punktestand im Hauptmenü](images/Punktestand_HM.png)
 
    Sind alle vier Kategorien abgeschlossen, kann das Gesamtergebnis über das Hauptmenü eingesehen werden, indem man auf den Button „Ergebnisse anzeigen“ unten
    rechts im Widget klickt.
+   ![Ergebnisse Anzeigen](images/Ergebnisse_anzeigen.png)
 
    #### Beispielhafte Auswertung
    Eine beispielhafte Auswertung des Quiz könnte folgendermaßen aussehen:
+   ![Auswertung Beispiel](images/Auswertung.png)
 
    Unten links kann ausgewählt werden, ob man zum Hauptmenü zurückkehren, das Quiz neu starten oder beenden möchte.
 
@@ -221,12 +230,13 @@ build_categories --> Category
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 5.Testen des Programms mit Pytest:
-Falls Sie das Quiz auf Fehler im Code testen möchten, können Sie dies mit Pytest tun. <br>
-Wählen Sie eine der Testdateien links in der Explorer-leiste innerhalb des „tests“-Ordners aus. Daraufhin gehen Sie NICHT 
-auf den „Run Python File“-Button, sondern öffnen ein Terminal, indem Sie in der obersten Leiste die drei Punkte zwischen 
-„Run“ und dem Pfeil nach links auswählen, dann „Terminal“ und dann „New Terminal“.
-Alternativ können Sie ein bestehendes Terminal unten rechts neben dem Terminalfeld auswählen, die alle „Python“ heißen.<br>
-Daraufhin schreibt man in das Terminal „pytest -v“ rein, und die Dateien werden getestet. Eine Fehleranalyse sollte in dem Terminal auftauchen.
+Falls Sie das Quiz auf Fehler im Code testen möchten, können Sie dies mit Pytest tun.
+Wählen Sie eine der Testdateien links in der Explorer-leiste innerhalb des „tests“-Ordners aus. 
+Daraufhin gibt man folgenden befehl in Ihrem Terminal ein:
+```bash
+pytest -v
+```
+
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -234,8 +244,9 @@ Daraufhin schreibt man in das Terminal „pytest -v“ rein, und die Dateien wer
 
 6. Mitwirkende am Quiz: <br>
 
-  Lead Developer: Sarah Friedmann <br>
-  Testverantwortliche: Tetiana Martyniuk <br>
-  Dokumentationsverantwortliche: Darja Scherbina <br>
-  Präsentationsverantwortliche: Javeria Mohammad
+Lead Developer: Sarah Friedmann <br>
+Testverantwortliche: Tetiana Martyniuk <br>
+GUI-Entwicklung: Javeria Mohammad <br>
+Präsentationsverantwortliche: Darja Scherbina <br>
+
 
