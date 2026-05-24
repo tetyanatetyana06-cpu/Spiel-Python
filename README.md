@@ -51,9 +51,9 @@ Unser Projekt wurde mithilfe von GitHub, Visual Studio Code und Pycharm erstellt
 ## 3. Klassendiagramm als UML-Skizze
 ```bash
 @startuml
-&#39; =========================================================
-&#39; CATEGORY
-&#39; =========================================================
+=========================================================
+CATEGORY
+=========================================================
 class Category {
 - name: str
 - fragen: List
