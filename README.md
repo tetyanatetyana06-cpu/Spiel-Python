@@ -12,15 +12,9 @@
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
    
 ## 1. Projektbeschreibung: <br>
-Ein Quiz, was unseren Kommilitonen helfen soll, ihr Wissen zu zwei unserer Prüfungsfächer aufzufrischen. 
-Das Quiz beinhaltet Multipe-Choice-Fragen sowie Rechenaufgaben und eine kleine Spaß-Kategorie mit Fragen, die nichts mit Uni-Inhalten zu tun haben.
-Das Quiz besteht aus vier Kategorien, die in beliebiger Reihenfolge abgearbeitet werden können. Jede Kategorie enthält
-maximal drei Fragen. Beantwortet der Nutzer die erste Frage richtig, besteht er die Kategorie. Hat der Benutzer eine Frage falsch beantwortet, 
-hat er noch zwei weitere Versuche mit zwei anderen Fragen, bevorer in der Kategorie druchfällt. Am Ende des Quiz wird das Ergebnis des 
-Benutzers ausgewertet. Man kann das Quiz auch während des Versuchs neustarten, wobei alle bisherigen Eingaben des Durchlaufs gelöscht werden.
-
-Unser Projekt wurde mithilfe von GitHub, Visual Studio Code und Pycharm erstellt. Zur Unterstützung unserer Arbeit
-haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet. 
+Ein Quiz, das unseren Kommilitonen helfen soll ihr Modulwissen in wenigen Fragen aufzufrischen. Das Quiz beinhaltet Multiple-Choice-Fragen sowie Rechenaufgaben und eine kleine Spaß-Kategorie mit Fragen, die nichts mit Uni-Inhalten zu tun haben. Das Quiz besteht aus vier Kategorien, die in beliebiger Reihenfolge abgearbeitet werden können. Jede Kategorie enthält maximal drei Fragen. Beantwortet der Nutzer die erste Frage richtig, besteht er die Kategorie. Hat der Benutzer eine Frage falsch beantwortet, hat er noch zwei weitere Versuche mit zwei anderen Fragen, bevor er in der Kategorie durchfällt. Der Punktestand kann während der Bearbeitung des Quiz eingesehen werden, oder nach Bearbeitung der vier Kategorien in Form einer Auswertung. Man kann das Quiz auch während des Versuchs neustarten, wobei alle bisherigen Eingaben des Durchlaufs gelöscht werden.
+Unser Projekt wurde mithilfe von GitHub, Visual Studio Code und Pycharm erstellt. Zur Unterstützung unserer Arbeit haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet.
+ 
   
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## 2. Voraussetzungen und Installation <br>
@@ -71,9 +65,9 @@ class Category {
 + play_category()
 }
 
-&#39; =========================================================
-&#39; FRAGE (MULTIPLE CHOICE)
-&#39; =========================================================
+=========================================================
+FRAGE (MULTIPLE CHOICE)
+=========================================================
 class Frage {
 - text: str
 - antworten: List[str]
@@ -85,9 +79,9 @@ class Frage {
 + correct_choice_1_based():
 + correct_answer_text()
 }
-&#39; =========================================================
-&#39; FRAGE OHNE INDEX (OFFENE FRAGE)
-&#39; =========================================================
+=========================================================
+FRAGE OHNE INDEX (OFFENE FRAGE)
+=========================================================
 class FrageOhneIndex {
 - text: str
 - richtige_antwort: str
@@ -96,9 +90,9 @@ class FrageOhneIndex {
 + stellen()
 + is_correct()
 }
-&#39; =========================================================
-&#39; QUIZ ENGINE (LOGIK)
-&#39; =========================================================
+=========================================================
+QUIZ ENGINE (LOGIK)
+=========================================================
 class QuizEngine {
 - categories: List[Category]
 
@@ -117,9 +111,9 @@ class QuizEngine {
 - _handle_correct()
 - _handle_incorrect()
 }
-&#39; =========================================================
-&#39; SUBMIT RESULT (DATA CLASS)
-&#39; =========================================================
+=========================================================
+SUBMIT RESULT (DATA CLASS)
+=========================================================
 class SubmitResult {
 + correct: bool
 + message: str
@@ -128,9 +122,9 @@ class SubmitResult {
 + finished_category: bool
 + category_status: Optional[str]
 }
-&#39; =========================================================
-&#39; GUI (TKINTER)
-&#39; =========================================================
+=========================================================
+GUI (TKINTER)
+=========================================================
 class QuizGUI {
 - root: Tk
 - engine: QuizEngine
@@ -177,18 +171,18 @@ class QuizGUI {
 }
 
 }
-&#39; =========================================================
-&#39; RELATIONSHIPS
-&#39; =========================================================
-Category &quot;1&quot; --&gt; &quot;*&quot; Frage
-Category &quot;1&quot; --&gt; &quot;*&quot; FrageOhneIndex
-QuizEngine --&gt; Category
+=========================================================
+RELATIONSHIPS
+=========================================================
+Category "1"--> "*"Frage
+Category "1"-->"*"FrageOhneIndex
+QuizEngine --> Category
 
-QuizEngine --&gt; SubmitResult
-QuizEngine --&gt; QuestionType
-QuizGUI --&gt; QuizEngine
-QuizGUI --&gt; SubmitResult
-build_categories --&gt; Category
+QuizEngine --> SubmitResult
+QuizEngine --> QuestionType
+QuizGUI --> QuizEngine
+QuizGUI --> SubmitResult
+build_categories --> Category
 @enduml
 
 ```
@@ -199,6 +193,8 @@ build_categories --&gt; Category
 4. Ausführen des Quiz: <br>
    Die Datei main.py muss ausgewählt werden. Anschließend wird der Code durch Klicken auf den „Run“-Button in Ihrer IDE ausgeführt. Das GUI sollte nach wenigen
    Augenblicken erscheinen. Zunächst wird das Hauptmenü angezeigt:
+   images/Hauptmenü1.png
+
 
    Möchte man das Quiz während der Bearbeitung neu starten oder beenden, kann dies über den „Menu“-Button oben links im Interface erfolgen.
    Weitere Informationen zu den Quizregeln, eine Spielbeschreibung sowie zusätzliche Hinweise können über den „Info“-Button neben dem „Menu“-Button aufgerufen
