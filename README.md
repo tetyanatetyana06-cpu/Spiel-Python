@@ -13,6 +13,7 @@
    
 ## 1. Projektbeschreibung: <br>
 Ein Quiz, das unseren Kommilitonen helfen soll ihr Modulwissen in wenigen Fragen aufzufrischen. Das Quiz beinhaltet Multiple-Choice-Fragen sowie Rechenaufgaben und eine kleine Spaß-Kategorie mit Fragen, die nichts mit Uni-Inhalten zu tun haben. Das Quiz besteht aus vier Kategorien, die in beliebiger Reihenfolge abgearbeitet werden können. Jede Kategorie enthält maximal drei Fragen. Beantwortet der Nutzer die erste Frage richtig, besteht er die Kategorie. Hat der Benutzer eine Frage falsch beantwortet, hat er noch zwei weitere Versuche mit zwei anderen Fragen, bevor er in der Kategorie durchfällt. Der Punktestand kann während der Bearbeitung des Quiz eingesehen werden, oder nach Bearbeitung der vier Kategorien in Form einer Auswertung. Man kann das Quiz auch während des Versuchs neustarten, wobei alle bisherigen Eingaben des Durchlaufs gelöscht werden.
+Hierbei handelt es sich um die Version des Quiz, die um ein Graphical User Interface erweitert wurde.
 Unser Projekt wurde mithilfe von GitHub, Visual Studio Code und Pycharm erstellt. Zur Unterstützung unserer Arbeit haben wir die KI-Tools ChatGPT und hauptsächlich Microsoft Copilot verwendet.
  
   
